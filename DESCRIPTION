@@ -7,3 +7,4 @@ Depends: tidyverse, stringr, glue, readxl
 License: MIT
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1
