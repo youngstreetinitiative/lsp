@@ -11,16 +11,33 @@
 
 process_sheet <- function(input_ls) {
 
+  message(input_ls$name)
+
   var_meta <- input_ls$file_path %>%
     read_excel(sheet = 1) %>%
     meta_clean()
 
-  working_tbl <- input_ls$file_path %>%
-    read_excel(sheet = 2) %>%
-    remove_meta()
+  sheet_count <- input_ls$file_path %>%
+    excel_sheets() %>%
+    .[!. %in% c("Index", "Inquiries")]
+
+  message(glue("--- has {length(sheet_count)} sheet/s"))
+
+  if(length(sheet_count) == 1) {
+    working_tbl <- input_ls$file_path %>%
+      read_excel(sheet = 2) %>%
+      remove_meta()
+  } else {
+    working_tbl <- sheet_count %>%
+      seq_along() %>%
+      map( ~ read_excel_multi(input_ls$file_path, sheet = .x)) %>%
+      bind_cols() %>%
+      remove_meta()
+  }
 
   original_nms <- colnames(working_tbl)
   new_nms <- clean_names_full(original_nms)
+
   var_meta <- var_meta %>%
     mutate(Data_Item_Description = new_nms[-1])
 

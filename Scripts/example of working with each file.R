@@ -13,7 +13,8 @@ ls <- files %>%
   map( ~ process_sheet(.x))
 
 
-x$working_tbl$Original
 
-y <- pluck(x, "working_tbl", "Original")
+
+
+y <- pluck(ls, "working_tbl", "Original")
 # get names
