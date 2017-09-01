@@ -14,6 +14,8 @@ meta_clean <- function(meta_data = NULL){
     head(max(lengths(.)) - 1) %>%
     tail(max(lengths(.)) - 1) %>%
     `colnames<-`(.[1,]) %>%
+    `colnames<-`(str_replace_all(colnames(.), " ", "_")) %>%
+    `colnames<-`(str_replace_all(colnames(.), "\\.", "")) %>%
     tail(max(lengths(.)) - 1)
 
 }
