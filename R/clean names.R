@@ -16,3 +16,5 @@ clean_names_full <- function(names_vec) {
     str_replace_all("__","_") %>%
     str_replace_all(c("\\(" = "", "\\)" = ""))
 }
+
+
