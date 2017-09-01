@@ -10,6 +10,6 @@
 #' @export
 #'
 remove_meta <- function(df) {
-  meta_lower_bound <-  which(str_detect(df$X__1, "Series ID")) + 1
+  meta_lower_bound <-  which(str_detect(df[1], "Series ID")) + 1
   df[meta_lower_bound:max(lengths(df)),]
 }

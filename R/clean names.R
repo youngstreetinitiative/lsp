@@ -8,7 +8,7 @@
 #' @export
 
 clean_names_full <- function(names_vec) {
-  original_nms %>%
+  names_vec %>%
     str_replace_all(";", "") %>%
     str_trim() %>%
     str_replace_all(" ", "_") %>%
