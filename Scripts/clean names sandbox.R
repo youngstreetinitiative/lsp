@@ -1,11 +1,15 @@
 
 
-#'  Clean ABS variable names (full)
-#'
-#' @name clean_names_full
-#' @param names_vec Character vector (eg. \code{colnames(df)})
-#' @return A character vector
-#' @export
+
+files <- list.files("examples") %>%
+  map( ~ list(
+    name = str_replace(.x, ".xls", ""),
+    file_path =  glue("examples/{.x}")
+  )) %>%
+  set_names(map_chr(., "name"))
+
+
+
 
 clean_names_full <- function(names_vec) {
   names_vec %>%
@@ -33,6 +37,14 @@ clean_names_full <- function(names_vec) {
                       "\\._\\." = "_",
                       "_\\." = "_",
                       "\\._" = "_"
-    ))
+                      ))
 }
 
+
+nms <- map_chr(files, "file_path") %>%
+  map( ~ read_excel(.x, sheet = 2) %>%
+         colnames())
+
+
+nms %>%
+  map( ~ clean_names_full(.x))
