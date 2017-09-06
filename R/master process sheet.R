@@ -3,7 +3,7 @@
 #'  For a typcial sheet 2
 #'
 #' @name process_sheet
-#' @param df ABS data frame
+#' @param input_ls ABS data frame
 #' @return a data frame
 #' @export
 
@@ -13,6 +13,32 @@ process_sheet <- function(input_ls) {
 
   message(input_ls$name)
 
+  # parts from Alex's fun to grab details for cover... ====
+   meta_tbl_umbrella <- input_ls$file_path %>%
+    read_excel(sheet = 1) %>%
+    select(`Time Series Workbook`) %>%
+    filter(!is.na(`Time Series Workbook`)) %>%
+    pull(1)
+
+  cat_no <- regmatches(meta_tbl_umbrella[1], gregexpr("[[:digit:]]+", meta_tbl_umbrella[1])) %>%
+    unlist() %>%
+    str_c(collapse = ".")
+
+  Table_Title = str_trim(str_replace(meta_tbl_umbrella[2], unlist(ex_between(meta_tbl_umbrella[2], "T", ".", include.markers = TRUE)), ""))
+
+  Table_No = str_replace(unlist(ex_between(meta_tbl_umbrella[2], "T", ".", include.markers = TRUE)), "\\.", "") %>%
+    str_replace_all(c(
+      "TABLE" = "",
+      "Table" = "",
+      "table" = ""
+    )) %>% str_trim()
+
+  cat_no <- paste0(cat_no,Table_No)
+
+  full_name <- glue("ABS_{cat_no}_{Table_Title}")
+
+
+  # my parts =====
   var_meta <- input_ls$file_path %>%
     read_excel(sheet = 1) %>%
     meta_clean()
@@ -56,6 +82,10 @@ process_sheet <- function(input_ls) {
     split(.$Series_Type) %>%
     map( ~ spread(.x, cat, val))
 
-  list(var_meta = var_meta, working_tbl = working_tbl)
+
+
+
+  list(var_meta = var_meta, working_tbl = working_tbl, full_name = full_name)
 
 }
+

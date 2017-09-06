@@ -1,14 +1,14 @@
 
 
 # ross's sandbox
-df_sheet_2 <-read_excel("examples/5204055_changes_inventories.xls", sheet = 2)
-df_front_meta <-read_excel("examples/5204055_changes_inventories.xls", sheet = 1)
+df_sheet_2 <-read_excel("sheets/5204055_changes_inventories.xls", sheet = 2)
+df_front_meta <-read_excel("sheets/5204055_changes_inventories.xls", sheet = 1)
 
 
-df_sheet_2 <-read_excel("examples/5206006_industry_gva.xls", sheet = 2)
-df_front_meta <-read_excel("examples/5206006_industry_gva.xls", sheet = 1)
+df_sheet_2 <-read_excel("sheets/5206006_industry_gva.xls", sheet = 2)
+df_front_meta <-read_excel("sheets/5206006_industry_gva.xls", sheet = 1)
 
-files <- list.files("examples") %>%
+files <- list.files("sheets") %>%
   set_names(str_replace(., ".xls", ""))
 
 
