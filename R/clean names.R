@@ -20,19 +20,18 @@ clean_names_full <- function(names_vec) {
            str_replace_all(" ", ".") %>%
            str_c(collapse = "_")
     ) %>%
-    str_split("-") %>%
-    map( ~ str_trim(.x) %>%
-           .[. != ""] %>%
-           str_replace_all(" ", ".") %>%
-           str_c(collapse = "_")
-    ) %>%
     unlist() %>%
     str_replace_all(c("\\(" = "",
                       "\\)" = "",
                       "," = "",
                       "\\._\\." = "_",
                       "_\\." = "_",
-                      "\\._" = "_"
-    ))
+                      "\\._" = "_",
+                      ">"="",
+                      "\\-"="."
+    )) %>%
+    str_replace_all(c("___"="_",
+                      "\\s+" = ".",
+                      "__"="_"))
 }
 
