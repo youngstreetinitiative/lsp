@@ -71,7 +71,7 @@ process_sheet <- function(input_ls) {
   colnames(working_tbl) <- new_nms
 
   working_tbl <- working_tbl %>%
-    mutate(Date = as.POSIXct(as.numeric(Date) * (60*60*24), origin="1899-12-30", tz="GMT"))
+    mutate(Date = as.POSIXct(as.numeric(Date) * (60*60*24), origin="1899-12-30", format="%Y-%m-%d", tz="GMT"))
 
   split_key <- var_meta %>%
     distinct(Data_Item_Description, Series_Type)
