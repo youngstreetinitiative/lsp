@@ -6,6 +6,7 @@
 #' @param names_vec Character vector (eg. \code{colnames(df)})
 #' @return A character vector
 #' @export
+#'
 
 clean_names_full <- function(names_vec) {
   names_vec %>%
@@ -27,11 +28,11 @@ clean_names_full <- function(names_vec) {
                       "\\._\\." = "_",
                       "_\\." = "_",
                       "\\._" = "_",
-                      ">"="",
-                      "\\-"="."
+                      ">" = "",
+                      "\\-" = "."
     )) %>%
-    str_replace_all(c("___"="_",
+    str_replace_all(c("___" = "_",
                       "\\s+" = ".",
-                      "__"="_"))
+                      "__" = "_"))
 }
 
