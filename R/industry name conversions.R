@@ -78,7 +78,7 @@ IndustryNames <- c("Accommodation.and.Food.Services"="Hospitality",
                    "16.Market.Sector.industries.c"="16MarketSectorIndustries",
                    "16.Market.Sector.industries.d"="16MarketSectorIndustries")
 
-IndustySectors <- c("Agriculture"="Primary/Secondary",
+IndustrySectors <- c("Agriculture"="Primary/Secondary",
                     "Mining"="Primary/Secondary",
                     "Manufacturing"="Primary/Secondary",
                     "Construction"="Primary/Secondary",
