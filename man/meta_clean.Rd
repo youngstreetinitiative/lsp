@@ -4,10 +4,12 @@
 \alias{meta_clean}
 \title{Clean ABS Meta Data}
 \usage{
-meta_clean(meta_data = NULL)
+meta_clean(meta_data = NULL, table_type = NULL)
 }
 \arguments{
 \item{meta_data}{This is the ABS excel title page that you read in with the meta data on it.}
+
+\item{table_type}{This is a character vector of the kind of ABS table it is Index or Multi}
 }
 \value{
 A clean dataframe with the meta data.

@@ -1,21 +1,11 @@
-#'  Return data frame with the meta data removed
-#'
-#'  For a typcial sheet 2
-#'
-#' @name process_sheet
-#' @param input_ls ABS data frame
-#' @return a data frame
-#' @export
+process_sheet_new <- function(input_ls) {
 
-
-process_sheet <- function(input_ls) {
-
-  #message(input_ls$name)
+  message(input_ls$name)
 
   # parts from Alex's fun to grab details for cover... ====
   meta_tbl_umbrella <- lsp:::umbrella(input_ls)
 
-  #message("Umbrella Done")
+  message("Umbrella Done")
 
   if (input_ls$table_type == "Index") {
 
@@ -48,14 +38,14 @@ process_sheet <- function(input_ls) {
   full_name <- glue("ABS_{cat_no}_{Table_Title}")
 
 
-  #message("Full Name done")
+  message("Full Name done")
 
   # my parts =====
   var_meta <- input_ls$file_path %>%
     read_excel(sheet = 1) %>%
-    meta_clean(., table_type = input_ls$table_type)
+    meta_clean(table_type = input_ls$table_type)
 
-  #message("Meta Table Done")
+  message("Meta Table Done")
 
   sheet_count <- lsp:::sheet_counter(input_ls, var_meta)
 
@@ -67,7 +57,7 @@ process_sheet <- function(input_ls) {
 
   #print(working_tbl)
 
-  #message("Working Table created")
+  message("Working Table created")
 
   if (input_ls$table_type == "Index") {
     original_nms <- colnames(working_tbl)
@@ -103,5 +93,3 @@ process_sheet <- function(input_ls) {
   #
   # return(working_list)
 }
-
-
