@@ -129,7 +129,7 @@ process_sheet_new <- function(input_ls) {
   # parts from Alex's fun to grab details for cover... ====
   meta_tbl_umbrella <- lsp:::umbrella(input_ls)
 
-  message("Umbrella Done")
+#  message("Umbrella Done")
 
   if (input_ls$table_type == "Index") {
 
@@ -162,18 +162,18 @@ process_sheet_new <- function(input_ls) {
   full_name <- glue("ABS_{cat_no}_{Table_Title}")
 
 
-  message("Full Name done")
+ # message("Full Name done")
 
   # my parts =====
   var_meta <- input_ls$file_path %>%
     read_excel(sheet = 1) %>%
     meta_clean(table_type = input_ls$table_type)
 
-  message("Meta Table Done")
+  #message("Meta Table Done")
 
   sheet_count <- lsp:::sheet_counter(input_ls, var_meta)
 
-  print(sheet_count)
+ # print(sheet_count)
 
   #message(glue("--- has {length(sheet_count)} sheet/s"))
 
@@ -181,7 +181,7 @@ process_sheet_new <- function(input_ls) {
 
   #print(working_tbl)
 
-  message("Working Table created")
+  #message("Working Table created")
 
   if (input_ls$table_type == "Index") {
     original_nms <- colnames(working_tbl)
@@ -209,7 +209,7 @@ process_sheet_new <- function(input_ls) {
 
   }
 
-  print(working_tbl)
+  #print(working_tbl)
 
   working_list <- list("var_meta" = var_meta, "working_tbl" = working_tbl, "full_name" = full_name)
 
