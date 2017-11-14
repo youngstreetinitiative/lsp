@@ -9,7 +9,7 @@
 
 tbl_meta <- function(url_ls = lsp:::abs_urls){
 
-  collect_data_multi()
+  #collect_data_multi()
   date <- Sys.Date()
   tbl_meta <- list()
 
