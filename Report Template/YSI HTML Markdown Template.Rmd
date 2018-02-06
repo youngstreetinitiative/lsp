@@ -1,0 +1,46 @@
+---
+title: "HTML Markdown Template"
+author: ""
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    css: YSIcss.css
+    highlight: pygments
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Load the lsp package with useful packages and necessary YSI built functions
+library(lsp)
+# Load the Dropbox directory from which to draw and save objects
+paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
+```
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+
+```{r echo=FALSE, error=F, message=F, warning=F}
+# This is a test running of the Bundle_Sheets function drawing from a test folder of 3 differently formatted excel files from the ABS
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/Economy/Growth/Productivity/Data/For R Analysis TEST")
+```
+
+# Section 1
+
+## Section 1.1
+
+
+```{r echo=FALSE, error=F, message=F, warning=F, fig.width=10, fig.height=7}
+
+```
+
+
+# Data References
+```{r results="asis",echo=FALSE}
+# Prints out the table of sources used to make graphs
+kable(select(GraphSources, ReferencePrintOut),
+      col.names = "Data Sources",
+      format = "markdown")
+```

@@ -1,0 +1,44 @@
+---
+title: "HTML Slideshow Markdown Template"
+author: ""
+date: "`r Sys.Date()`"
+output: 
+  slidy_presentation:
+    css: YSIcss.css
+    highlight: pygments
+    self_contained: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Load the lsp package with useful packages and necessary YSI built functions
+library(lsp)
+# Load the Dropbox directory from which to draw and save objects
+paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
+```
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+
+<!-- guide to using Slidy presentations http://rmarkdown.rstudio.com/slidy_presentation_format.html -->
+
+```{r echo=FALSE, error=F, message=F, warning=F}
+# This is a test running of the Bundle_Sheets function drawing from a test folder of 3 differently formatted excel files from the ABS
+#Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/Economy/Growth/Productivity/Data/For R Analysis TEST")
+```
+
+# Section 1
+
+## Section 1.1
+
+
+```{r echo=FALSE, error=F, message=F, warning=F, fig.width=10, fig.height=7}
+
+```
+
+
+# Data References
+```{r results="asis",echo=FALSE}
+# Prints out the table of sources used to make graphs
+kable(select(GraphSources, ReferencePrintOut),
+      col.names = "Data Sources",
+      format = "markdown")
+```
