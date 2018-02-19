@@ -189,7 +189,7 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
       # Save the table name on the sheet
       table_name <- (working_tbl_i %>% pull(1))[which(str_detect(working_tbl_i %>% pull(1), "Table"))]
       # start from first row with an observation in column 2
-      wt_startrow <- which(is.na(working_tbl_i %>% pull(1)))[1] + 1
+      wt_startrow <- which(is.na(working_tbl_i %>% pull(1)))[1]
       # cut out the top rows above start row
       working_tbl_i <- working_tbl_i[wt_startrow:nrow(working_tbl_i),]
       # find the first row of the data as the first NA in the second column after cutting
@@ -262,7 +262,7 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
             working_tbl_i$RowName3[l] <- working_tbl_i$RowName1[l]
           } else if (!is.na(working_tbl_i$RowName3[l - 1])) {
             # if the RowName3 above is named, then apply it
-            working_tbl_i$RowName3[l] <- working_tbl_i$RowName3[i - 1]
+            working_tbl_i$RowName3[l] <- working_tbl_i$RowName3[l - 1]
           } else {
             working_tbl_i$RowName3[l] <- NA
           }
@@ -271,14 +271,14 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
         }
 
         # Deriving RowName4 --> 2 rows on NAs below the heading row
-        if (i > 2) {
-          if (is.na(working_tbl_i[i, 2]) &
-              is.na(working_tbl_i[i + 1, 2]) &
-              is.na(working_tbl_i[i + 2, 2])) {
+        if (l > 2) {
+          if (is.na(working_tbl_i[l, 2]) &
+              is.na(working_tbl_i[l + 1, 2]) &
+              is.na(working_tbl_i[l + 2, 2])) {
             working_tbl_i$RowName4[l] <- working_tbl_i$RowName1[l]
-          } else if (!is.na(working_tbl_i$RowName4[i - 1])) {
+          } else if (!is.na(working_tbl_i$RowName4[l - 1])) {
             # if the RowName4 above is named, then apply it
-            working_tbl_i$RowName4[l] <- working_tbl_i$RowName4[i - 1]
+            working_tbl_i$RowName4[l] <- working_tbl_i$RowName4[l - 1]
           } else {
             working_tbl_i$RowName4[l] <- NA
           }

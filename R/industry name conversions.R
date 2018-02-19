@@ -163,6 +163,31 @@ WageDataAvailIndustries <- c("Mining",
                        "OtherServices",
                        "AllIndustries")
 
+IndustryFullNames <- c("Agriculture" = "Agriculture, forestry and fishing",
+                       "Mining" = "Mining",
+                       "Manufacturing" = "Manufacturing",
+                       "Utilities" = "Electricity, gas, water and waste services",
+                       "Construction" = "Construction",
+                       "Wholesale" = "Wholesale trade",
+                       "Retail" = "Retail trade" ,
+                       "Hospitality" = "Accommodation and food services",
+                       "TransportWarehousing" = "Transport, postal and warehousing",
+                       "Media" = "Information, media and telecommunications",
+                       "FinanceInsurance" = "Finance and insurance services",
+                       "RentalRealEstate" = "Property, hiring and real estate services",
+                       "ProfScientificTech" = "Professional, scientific and technical services",
+                       "Administration" = "Administrative and support services",
+                       "ArtsRecreation" = "Arts and recreational services",
+                       "OtherServices" = "Other services",
+                       "PublicAdminSafety" = "Public administration and safety",
+                       "Education" = "Education and training",
+                       "HealthSocial" = "Health care and social assistance",
+                       "12SelectedIndustries" = "12 selected industries",
+                       "16MarketSectorIndustries" =  "16 market sector industries",
+                       "AllIndustries" = "All Industries")
+
+
+
 IndustrySectors <- c("Agriculture"="Primary/Secondary",
                     "Mining"="Primary/Secondary",
                     "Manufacturing"="Primary/Secondary",

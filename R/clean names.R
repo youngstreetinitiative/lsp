@@ -10,6 +10,7 @@
 
 clean_names_full <- function(names_vec) {
   names_vec %>%
+    str_trim %>%
     str_replace_all(c("_" = ".")) %>%
     str_replace_all(c("\\s+;" = "_",
                       ":\\s+" = "_",
