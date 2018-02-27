@@ -1,6 +1,6 @@
-path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Debt_housing/Housing Pitch Work/Working Files/House Data R Working Cube.xlsx"
+path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/House Data R Working Cube.xlsx"
 
-save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Debt_housing/Housing Pitch Work/Working Files/R images/"
+save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/R images"
 
 city_list <- c("Sydney", "Melbourne", "Brisbane", "Adelaide", "Perth", "Hobart", "Darwin", "Canberra")
 
@@ -27,6 +27,44 @@ df_median_city_house <- df %>% select(Year, `Median Trans Price of House Sydney`
   `colnames<-`(c("Year", "Sydney", "Melbourne", "Brisbane", "Adelaide", "Perth", "Hobart", "Darwin", "Canberra")) %>%
   gather(key = `Trans Type`, value = Price, -Year) %>%
   mutate(`Trans Type` = factor(`Trans Type`, levels = city_list, ordered = TRUE))
+
+df_median_growth <- df %>% select(Year, `Median Trans Price of House Sydney`,
+                                  `Median Trans Price of House Melbourne`,
+                                  `Median Trans Price of House Brisbane`,
+                                  `Median Trans Price of House Adelaide`,
+                                  `Median Trans Price of House Perth`,
+                                  `Median Trans Price of House Hobart`,
+                                  `Median Trans Price of House Darwin`,
+                                  `Median Trans Price of House Canberra`) %>%
+  `colnames<-`(c("Year", "Sydney", "Melbourne", "Brisbane", "Adelaide", "Perth", "Hobart", "Darwin", "Canberra")) %>%
+  mutate(Growth_Rate_Sydney = (Sydney - lag(Sydney, n = 1L)) / lag(Sydney, n = 1L) * 100,
+         Growth_Rate_Melbourne = (Melbourne - lag(Melbourne, n = 1L)) / lag(Melbourne, n = 1L) * 100,
+         Growth_Rate_Brisbane = (Brisbane - lag(Brisbane, n = 1L)) / lag(Brisbane, n = 1L) * 100,
+         Growth_Rate_Perth = (Perth - lag(Perth, n = 1L)) / lag(Perth, n = 1L) * 100,
+         RollMeanGrowth_Sydney = (Growth_Rate_Sydney + lag(Growth_Rate_Sydney, 1) + lag(Growth_Rate_Sydney, 2) + lag(Growth_Rate_Sydney, 3) +
+                           lag(Growth_Rate_Sydney, 4) + lag(Growth_Rate_Sydney, 5) + lag(Growth_Rate_Sydney, 6))/7,
+         RollMeanGrowth_Melbourne = (Growth_Rate_Melbourne + lag(Growth_Rate_Melbourne, 1) + lag(Growth_Rate_Melbourne, 2) + lag(Growth_Rate_Melbourne, 3) +
+                                    lag(Growth_Rate_Melbourne, 4) + lag(Growth_Rate_Melbourne, 5) + lag(Growth_Rate_Melbourne, 6))/7,
+         RollMeanGrowth_Brisbane = (Growth_Rate_Brisbane + lag(Growth_Rate_Brisbane, 1) + lag(Growth_Rate_Brisbane, 2) + lag(Growth_Rate_Brisbane, 3) +
+                                    lag(Growth_Rate_Brisbane, 4) + lag(Growth_Rate_Brisbane, 5) + lag(Growth_Rate_Brisbane, 6))/7,
+         RollMeanGrowth_Perth = (Growth_Rate_Perth + lag(Growth_Rate_Perth, 1) + lag(Growth_Rate_Perth, 2) + lag(Growth_Rate_Perth, 3) +
+                                    lag(Growth_Rate_Perth, 4) + lag(Growth_Rate_Perth, 5) + lag(Growth_Rate_Perth, 6))/7) %>%
+  select(Year,
+         Growth_Rate_Sydney,
+         Growth_Rate_Melbourne,
+         Growth_Rate_Brisbane,
+         Growth_Rate_Perth,
+         RollMeanGrowth_Sydney,
+         RollMeanGrowth_Melbourne,
+         RollMeanGrowth_Brisbane,
+         RollMeanGrowth_Perth) %>%
+  gather(key = Growth_City, value = Growth_Rate, -Year, -RollMeanGrowth_Sydney, -RollMeanGrowth_Melbourne, -RollMeanGrowth_Brisbane, -RollMeanGrowth_Perth) %>%
+  gather(key = Roll_Growth_City, value = Rolling_Growth, -Year, -Growth_City, -Growth_Rate)
+
+ggplot(data = df_median_growth, aes(x = Year, y = Growth_Rate)) + geom_point(aes(colour = Growth_City)) + geom_line(aes(group = Growth_City, colour = Growth_City))
+
+ggplot(data = df_median_growth, aes(x = Year, y = Rolling_Growth)) + geom_point(aes(colour = Roll_Growth_City)) + geom_line(aes(group = Roll_Growth_City, colour = Roll_Growth_City))
+
 
 df_average <- df %>% select(Year, `All Average Approval Value`, `Real Estate Average Approval Value`) %>%
   gather(key = `Value Type`, value = Dollars, -Year)
