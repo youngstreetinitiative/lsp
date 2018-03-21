@@ -23,21 +23,18 @@ GraphSourcesfn <- function(TableName = NULL, Year = NA, Table_No = NA,
                         Name = pluck(Data_List,
                                      SubTable,
                                      "full_name"),
-                        Year = str_extract(pluck(Data_List,
+                        Year = str_extract(as.character(pluck(Data_List,
                                                  SubTable,
-                                                 "Month_Year"),
+                                                 "Month_Year")),
                                            "[0-9]+"))
     NewSource <- NewSource  %>%
       mutate(Source = str_extract(Name, "[A-Za-z]+"),
              Catalogue = str_extract(Name, "[0-9]+"))
 
     ## Table number depends on type
-    if(is.Date(pluck(Data_List,
-                     SubTable,
-                     "Series_End_Date"))){
+
     NewSource <- NewSource  %>%
-      mutate(Table_No = as.numeric(str_extract_all(Name, "[0-9]+")[[1]][2]))
-    }
+      mutate(Table_No = as.character(str_extract_all(Name, "[0-9]+")[[1]][2]))
 
     NewSource <- NewSource  %>%
       mutate(Reference = ifelse(Source == "ABS",
@@ -46,7 +43,8 @@ GraphSourcesfn <- function(TableName = NULL, Year = NA, Table_No = NA,
              ReferencePrintOut = gsub("_", " ", Name))
 
   } else {
-    NewSource <- tibble(Table = TableName,
+    NewSource <- tibble(Table = ifelse(is.na(TableName), "", TableName),
+                        Table_No = ifelse(is.na(Table_No), "", Table_No),
                         Year = Year,
                         Source = Source,
                         Catalogue = Catalogue)
@@ -59,7 +57,7 @@ GraphSourcesfn <- function(TableName = NULL, Year = NA, Table_No = NA,
   NewSource <- NewSource  %>%
     mutate(Reference = ifelse(Source == "ABS",
                               paste(Source, "Cat.", paste(Catalogue, Table_No, sep = "."), sep = " "),
-                              paste(Source, Table_No, sep = ".")),
+                              paste(Source, Catalogue, Table_No, sep = " ")),
            ReferencePrintOut = gsub("_", " ", Name))
 
 

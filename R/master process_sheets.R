@@ -66,6 +66,12 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
     Data.month <- Release_Time %>%
       strptime("%I.%M%p %d %B %Y") %>%
       format("%b%Y")
+    # some ABS datasets have a different date format including weekday (%a)
+    if(is.na(Data.month)){
+      Data.month <- Release_Time %>%
+        strptime("%I:%M %p %a %d %b %Y") %>%
+        format("%b%Y")
+    }
 
     # Full Name created by joining catalogue number, title, first table name and month of release/latest data
     full_name <- glue("ABS_{cat_no}_{Table_Title}_from {sheet_names[1]}_{Data.month}")
@@ -104,7 +110,7 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
     working_tbl <- working_tbl[-1,]
 
     ## Variable names break-up
-    VarNames <<- as.character(working_tbl$VarNames)
+    VarNames <- as.character(working_tbl$VarNames)
     MaxNumVarNames <- max(str_count(VarNames, "_")) + 1
     working_tbl_VarNameSplit <- strsplit(VarNames, "_")
 

@@ -3,6 +3,8 @@
 export(Bundle_Sheets)
 export(GFormTS)
 export(GraphSourcesfn)
+export(FormArrange)
+export(GplotFormTS)
 export(VarNameBreakdownfn)
 export(bundle_sheets)
 export(clean_names_full)
