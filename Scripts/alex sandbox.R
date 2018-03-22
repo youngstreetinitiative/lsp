@@ -1,38 +1,39 @@
-df <- data.frame(One = c("Hello", "Mellow", "Swellow", "Fellow"),
-                 Two = c("Bradbury", "Cadbury", "Londonderry", "Pike"),
-                 Three = c("Half", "Masts", "Keep", "Fast"), stringsAsFactors = FALSE)
+library(tidyverse)
+library(ggplot2)
 
-pin <- data.frame(which(df == "Masts", arr.ind = TRUE))
-
-print(pin)
-
-#df[pin$row[1], pin$col[1]]
-
-junk_set <- c(1:pin$row[1])
-
-print(junk_set)
-
-df_clean <- df[-junk_set, ]
-
-print(df_clean)
+df <- mtcars
+cars <- row.names(df)
+df <- cbind(df, cars)
 
 
 
+# Index <- factor(c("cyl", "hp"),
+#                 levels = c("cyl", "hp"),
+#                 ordered = TRUE)
+
+# colours <- factor(c("#FF6600", "#0000FF"),
+#                   levels = c("#FF6600", "#0000FF"),
+#                   ordered = TRUE)
+
+colours <- c("#FF6600", "#0000FF", "#CC0033")
+
+#names(Index) <- Index
+
+names(colours) <- c("cyl", "hp", "Boop")
+
+#Leveler <- Index
+
+#df_key = data.frame(Index, colours)
+
+df_cars <- df %>% select(cars, cyl ,hp) %>%
+  mutate(Boop = 30) %>%
+  gather(key = Index, value = Value, -cars) #%>%
+  #mutate(Index = factor(Index, levels = Leveler, ordered = TRUE))#,
+         #colours = as.character(colours[Index]))
+
+#df_cars <- merge(df_cars, df_key, by = "Index")
 
 
-
-
-
-
-ABS_cleanser <- function(df = NULL, x = NULL) {
-
-  pin <- data.frame(which(df == x, arr.ind = TRUE))
-
-  junk_set <- c(1:pin$row[1])
-
-  df_clean <- df[-junk_set, ]
-
-  return(df_clean)
-}
-
-
+ggplot2::ggplot(data = df_cars, aes(x = cars, y = Value)) +
+  geom_line(aes(group = Index, colour = Index)) +
+  scale_colour_manual(values = colours)

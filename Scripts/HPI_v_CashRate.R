@@ -50,7 +50,7 @@ ggplot2::ggplot(data = df1_clean, aes(x = Date, y = Num)) +
   geom_line(aes(group = Var, colour = Var), size = 1.5) +
   geom_dl(aes(colour = Var, label = Var),
           method = list("smart.grid")) +
-  scale_y_continuous(sec.axis = sec_axis(~./30000, name = "Chash Rate", labels = percent)) +
+  scale_y_continuous(sec.axis = sec_axis(~./30000, name = "Cash Rate", labels = percent)) +
   scale_x_continuous(breaks = seq(min(df1_clean$Date), max(df1_clean$Date), by = 2)) +
   ggtitle("Cash Rate and HPI Comparison") +
   xlab("Year") +

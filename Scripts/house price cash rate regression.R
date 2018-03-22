@@ -1,10 +1,10 @@
 
 #This is just inputting the data and setting up the tables to run the regressions and graph from
 
-path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Debt_housing/Housing Pitch Work/Working Files/Working Data/House Data R Working Cube.xlsx"
-path2 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Debt_housing/Housing Pitch Work/Working Files/Working Data/HPI and RBA Cash Rate_12022018.xlsx"
+path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/House Data R Working Cube.xlsx"
+path2 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/HPI and RBA Cash Rate_12022018.xlsx"
 
-save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Debt_housing/Housing Pitch Work/Working Files/R images/"
+save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/R images/"
 
 
 raw_input <- readxl::read_xlsx(path = path, sheet = 1)
@@ -62,7 +62,7 @@ ggplot2::ggplot(data = df_raw2adjust, aes(x = `Lag Cash Rate`, y = Index)) +
   geom_smooth(method = "lm") +
   theme_minimal() +
   ggtitle("Cash Rate and HPI Correlation (Lagged Monthly)") +
-  xlab("Lag cash Rate %")
+  xlab("Lag Cash Rate %")
 
 ggsave(filename = paste(save_path, "Cash Rate and HPI Correlation", ".jpeg", sep = ""), width = 35, height = 20, units = "cm")
 

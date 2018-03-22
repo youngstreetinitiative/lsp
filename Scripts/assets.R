@@ -11,22 +11,35 @@ colours <- factor(c("#0000CC", "#FF3300", "#FF6600", "#006633", "#FFCC66", "#993
                   levels = c("#0000CC", "#FF3300", "#FF6600", "#006633", "#FFCC66", "#9933CC"),
                   ordered = TRUE)
 Leveler <- Index
+
 df_colours <- data.frame(Index, colours)
+
 raw_df <- readxl::read_xlsx(path = path, sheet = 3)
+
 raw_df2 <- readxl::read_xlsx(path = path, sheet = 4)
+
 df <- raw_df %>% select(Date, All_Ords_Adj, All_Ords_Acc_Adj, Gold_Adj, HPI_Adj, Term_Deposit_Adj) %>%
   gather(key = Index, value = One_Dollar, -Date) %>%
   mutate(Index = factor(Index, levels = Leveler, ordered = TRUE))
+
 df <- merge(df, df_colours, by = "Index")
+
 df <- df %>% mutate(colours = as.character(colours))
+
 df_2 <- raw_df %>% select(Date, All_Ords_Adj, Gold_Adj, HPI_Adj, Term_Deposit_Adj) %>%
   gather(key = Index, value = One_Dollar, -Date)
+
 colour <- unique(df$colours)
+
 names(colour) <- unique(df$Index)
+
 df_3 <- raw_df2 %>% gather(key = Index, value = One_Dollar, -Date) %>%
   mutate(Index = factor(Index, levels = Leveler, ordered = TRUE))
+
 df_3 <- merge(df_3, df_colours, by = "Index")
+
 df_3 <- df_3 %>% mutate(colours = as.character(colours))
+
 colour_2 <- unique(df_3$colours)
 names(colour_2) <- unique(df_3$Index)
 
