@@ -6,7 +6,6 @@ bundle_sheets <- function(DropboxDataFolder = NULL) {
   if (!is.null(DropboxDataFolder)) {
     paths::DropboxDirFN(DropboxOrigin = DropboxDataFolder)
 
-    print(DropboxDir)
 
     files <- list.files(DropboxDir, pattern = ".xls") %>%
       map( ~ list(
@@ -16,7 +15,7 @@ bundle_sheets <- function(DropboxDataFolder = NULL) {
       set_names(map_chr(., "name"))
 
     master_ls <- files %>%
-      map( ~ lsp:::process_sheet_new(.x))
+      map( ~ lsp:::process_sheet_old(.x))
 
     nms <- master_ls %>% map_chr("full_name")
 
@@ -37,7 +36,7 @@ bundle_sheets <- function(DropboxDataFolder = NULL) {
           table_type = lsp:::sheet_check(glue("data-raw/{.x}")))) %>%
         set_names(map_chr(., "name"))
       master_ls <- files %>%
-    map( ~ lsp:::process_sheet_new(.x))
+    map( ~ lsp:::process_sheet_old(.x))
 
   nms <- master_ls %>% map_chr("full_name")
 

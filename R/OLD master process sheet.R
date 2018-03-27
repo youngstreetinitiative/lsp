@@ -2,13 +2,13 @@
 #'
 #'  For a typcial sheet 2
 #'
-#' @name process_sheet
+#' @name process_sheet_old
 #' @param input_ls ABS data frame
 #' @return a data frame
 #' @export
 
 
-process_sheet <- function(input_ls) {
+process_sheet_old <- function(input_ls) {
 
   #message(input_ls$name)
 
@@ -57,13 +57,11 @@ process_sheet <- function(input_ls) {
 
   #message("Meta Table Done")
 
-  sheet_count <- lsp:::sheet_counter(input_ls, var_meta)
+  sheet_names <- lsp:::sheet_namer(input_ls, var_meta)
 
-  print(sheet_count)
+  #message(glue("--- has {length(sheet_names)} sheet/s"))
 
-  #message(glue("--- has {length(sheet_count)} sheet/s"))
-
-  working_tbl <- lsp:::work_table(input_ls, sheet_count)
+  working_tbl <- lsp:::work_table(input_ls, sheet_names)
 
   #print(working_tbl)
 
@@ -94,8 +92,6 @@ process_sheet <- function(input_ls) {
     working_tbl <- working_tbl
 
   }
-
-  print(working_tbl)
 
   working_list <- list("var_meta" = var_meta, "working_tbl" = working_tbl, "full_name" = full_name)
 

@@ -10,6 +10,7 @@
 
 VarNameBreakdownfn <- function(datatable) {
 
+  #
   Varnames <- colnames(datatable)[-c(1:2)]
 
   Varnames1 <- strsplit(Varnames, "_")
@@ -31,7 +32,9 @@ VarNameBreakdownfn <- function(datatable) {
 
   VarnamesTable <- cbind(Varnames, Varnames2)
 
-  datatable <- datatable %>% gather(Varnames, Values, -c(Date, Series_Type))
+  datatable <- datatable %>%
+    gather(Varnames, Values, -c(Date, Series_Type)) %>%
+    mutate(Values = as.numeric(Values))
 
   tdatatable <- merge(datatable, VarnamesTable) %>%
     select(-Varnames)
