@@ -4,7 +4,7 @@
 \alias{GFormTS}
 \title{Graph Format templates}
 \usage{
-GFormTS(Facet = FALSE, Yaxis = NULL, YBreaks = 0)
+GFormTS(Facet = FALSE, Yaxis = "", YBreaks = 0, yintercept0 = TRUE)
 }
 \value{
 GGplot format
