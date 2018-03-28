@@ -172,12 +172,14 @@ GplotFormTS <- function(Facet = FALSE,
 
 
 FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = FALSE,
-                        title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NULL,
+                        title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NA,
                         caption = NULL, InclLogo = FALSE){
 
   ## If there is not a specified second Y axis, duplicate the name of the first Y axis
-  if(exists("Ytitle2")){
-    Ytitle2 <- Ytitle
+  if(is.na(Ytitle2)){
+    Ytitle2Adj <- Ytitle
+  } else {
+    Ytitle2Adj <- Ytitle2
   }
 
   ## Removing guides when not specified to include
@@ -202,7 +204,7 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
              gp = gpar(fontsize = 10),
              x = unit(0, "npc"),
              just = c("left", "bottom")),
-      textGrob(Ytitle2,
+      textGrob(Ytitle2Adj,
                gp = gpar(fontsize = 10),
                  x = unit(1, "npc"),
                just = c("right", "bottom"))),
@@ -239,7 +241,7 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
                x = unit(0, "npc"),
                just = c("left", "bottom"),
                hjust = 0),
-      textGrob(Ytitle2,
+      textGrob(Ytitle2Adj,
                gp = gpar(fontsize = 10),
                x = unit(1, "npc"),
                just = c("right", "bottom"),
