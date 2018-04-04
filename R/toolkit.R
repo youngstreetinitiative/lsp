@@ -1,6 +1,41 @@
 
+#'  Clean ABS variable names (full)
+#'
+#' @name clean_names_full
+#' @param names_vec Character vector (eg. \code{colnames(df)})
+#' @return A character vector
 #' @export
+#'
 
+clean_names_full <- function(names_vec) {
+  names_vec %>%
+    str_trim %>%
+    str_replace_all(c("_" = ".")) %>%
+    str_replace_all(c("\\s+;" = "_",
+                      ":\\s+" = "_",
+                      "\\s+\\-\\s+" = "_",
+                      "\\-\\s+" = "")) %>%
+    str_replace_all(c("\\(" = "",
+                      "\\)" = "",
+                      "\\$" = "",
+                      "\\>\\s" = "",
+                      "\\>" = "",
+                      ":" = "",
+                      "," = "",
+                      ";" = "")) %>%
+    str_replace_all(c("\\s+" = ".",
+                      "/" = ".",
+                      "\\-" = ".")) %>%
+    str_replace_all(c("\\._\\." = "_",
+                      "_\\." = "_",
+                      "\\._" = "_")) %>%
+    str_replace_all(c("___" = "_",
+                      "__" = "_")) %>%
+    map( ~ str_replace(.x," *[^a-zA-Z0-9]$", "")) %>% ## if the string ends in a non-alphanumeric, remove it
+    unlist()
+}
+
+#' @export
 read_excel_multi <- function(input, sheet) {
   if (sheet == 1) {
     read_excel(input, sheet = sheet + 1,
@@ -14,6 +49,7 @@ read_excel_multi <- function(input, sheet) {
 
 #this function checks the name of the first sheet and then determines what kind of
 #ABS data-set you are working with
+#' @export
 sheet_check <- function(path = NULL) {
   x <- excel_sheets(path) %>%
     paste(., collapse = "")
@@ -29,6 +65,7 @@ sheet_check <- function(path = NULL) {
 
 #this function takes the vetor of list meta information and return the title/umbrella
 #information of the ABS data-set so that cat-no and other info can be derived
+#' @export
 umbrella <- function(meta_info = NULL) {
 
   if (meta_info$table_type == "Multi_Table") {
@@ -51,28 +88,8 @@ umbrella <- function(meta_info = NULL) {
 }
 
 
-# abs_read <- function(path = NULL) {
-#   if (!is.null(path)) {
-#     paths::DropboxDirFN(DropboxOrigin = path)
-#     print(DropboxDir)
-#     files <- list.files(DropboxDir) %>%
-#       map( ~ list(
-#         name = gsub(("\\.xlsx|\\.xls"), "", .x),
-#         file_path = glue("{DropboxDir}/{.x}"),
-#         table_type = lsp:::sheet_check(glue("{DropboxDir}/{.x}")))) %>%
-#       set_names(map_chr(., "name"))
-#   } else {
-#     files <- list.files("data-raw") %>%
-#       map( ~ list(
-#         name = gsub(("\\.xlsx|\\.xls"), "", .x),
-#         file_path =  glue("data-raw/{.x}"),
-#         table_type = lsp:::sheet_check(glue("data-raw/{.x}")))) %>%
-#       set_names(map_chr(., "name"))
-#   }
-#   return(files)
-# }
-
 #this creates a vector of sheet names from your ABS data-set
+#' @export
 sheet_namer <- function(master_list = NULL, var_meta = NULL) {
 
   if (master_list$table_type == "Index") {
@@ -90,34 +107,9 @@ sheet_namer <- function(master_list = NULL, var_meta = NULL) {
 }
 
 
-work_table <- function(master_list = NULL, sheet_names = NULL) {
-
-  if (master_list$table_type == "Index") {
-    if (length(sheet_names) == 1) {
-      working_tbl <- master_list$file_path %>%
-        read_excel(sheet = 2) %>%
-        remove_meta()
-    } else {
-      working_tbl <- sheet_names %>%
-        seq_along() %>%
-        map( ~ read_excel_multi(master_list$file_path, sheet = .x)) %>%
-        bind_cols() %>%
-        remove_meta()
-    }
-  } else if (master_list$table_type == "Multi_Table") {
-
-    if (length(sheet_names) == 1) {
-      working_tbl <- master_list$file_path %>%
-        read_excel(sheet = 2)
-    } else {
-      working_tbl <- sheet_names %>%
-        seq_along() %>%
-        map( ~ read_excel(master_list$file_path, sheet = .x))
-    }
-  }
-}
 
 # Function for adaption financial year variables to dates (at the end of the financial year)
+#' @export
 FYtoDate <- function(FinancialYear = FinancialYear){
   Date <- as.Date(paste0(as.numeric((str_extract(FinancialYear, "[0-9]+"))) + 1, "-06-01"))
   return(Date)
