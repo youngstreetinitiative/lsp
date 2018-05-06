@@ -9,38 +9,35 @@ output:
     toc_float: true
     number_sections: true
     self_contained: yes
-    css: YSIcss.css
+    css: C:/Users/User/Documents/lsp/Report Template/YSIcss.css
     highlight: pygments
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Load the lsp package with useful packages and necessary YSI built functions
 library(lsp)
 # Load the Dropbox directory from which to draw and save objects
 paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 ```
-<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+<img src="C:/Users/User/Documents/lsp/Report Template/YSI.png" style="position:absolute;top:0px;right:0px;" />
 
-```{r echo=FALSE, error=F, message=F, warning=F}
-# This is a test running of the Bundle_Sheets function drawing from a test folder of 3 differently formatted excel files from the ABS
-Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/Economy/Growth/Productivity/Data/For R Analysis TEST")
+
+```{r echo = FALSE, error = F, message = F, warning = F}
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force")
+LabourForceList <- master_list
+rm(master_list)
 ```
 
-# Section 1
 
-## Section 1.1
-
-
-```{r echo=FALSE, error=F, message=F, warning=F, fig.width=10, fig.height=7}
+```{r echo = FALSE, error = F, message = F, warning = F, fig.width = 7, fig.height = 5}
 
 ```
-
 
 # Data References
-```{r results="asis",echo=FALSE}
+```{r results = "asis", echo = FALSE}
 # Prints out the table of sources used to make graphs
-kable(select(GraphSources, ReferencePrintOut),
+kable(select(GraphSources, ReferencePrintOut) %>% distinct,
       col.names = "Data Sources",
       format = "markdown")
 ```

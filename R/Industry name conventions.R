@@ -1,4 +1,7 @@
 ## for industry names
+
+#' @export
+
 IndustryNames <- c("Accommodation.and.Food.Services"="Hospitality",
                    "Accommodation.and.food.services"="Hospitality",
                    "Accommodation.and.food.services.H"="Hospitality",
@@ -113,6 +116,7 @@ IndustryNames <- c("Accommodation.and.Food.Services"="Hospitality",
                    "19"="OtherServices",
                    "Ownership.of.dwellings" = "Ownership.of.dwellings",
                    "Ownership.transfer.costs"="Ownership.transfer.costs")
+#' @export
 
 MarketSector16Industries <- c("Agriculture",
                               "Mining",
@@ -131,6 +135,8 @@ MarketSector16Industries <- c("Agriculture",
                               "ArtsRecreation",
                               "OtherServices",
                               "16MarketSectorIndustries")
+#' @export
+
 Selected12Industries <- c("Agriculture",
                           "Mining",
                           "Manufacturing",
@@ -144,6 +150,8 @@ Selected12Industries <- c("Agriculture",
                           "FinanceInsurance" ,
                           "ArtsRecreation",
                           "12SelectedIndustries")
+#' @export
+
 WageDataAvailIndustries <- c("Mining",
                        "Manufacturing",
                        "Utilities",
@@ -163,6 +171,9 @@ WageDataAvailIndustries <- c("Mining",
                        "ArtsRecreation",
                        "OtherServices",
                        "AllIndustries")
+
+#' @export
+
 
 IndustryFullNames <- c("Agriculture" = "Agriculture, forestry and fishing",
                        "Mining" = "Mining",
@@ -188,6 +199,7 @@ IndustryFullNames <- c("Agriculture" = "Agriculture, forestry and fishing",
                        "AllIndustries" = "All Industries")
 
 
+#' @export
 
 IndustrySectors <- c("Agriculture"="Primary/Secondary",
                     "Mining"="Primary/Secondary",
