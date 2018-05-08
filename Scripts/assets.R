@@ -1,8 +1,8 @@
 library(ggplot2)
 
-path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/asset class returns/asset class returns 2_Alexedit.xlsx"
+path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/asset class returns/asset class returns 2_Alexedit.xlsx"
 
-save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/R images/"
+save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/R images/"
 
 Index <- factor(c("All_Ords_Adj", "All_Ords_Acc_Adj", "Gold_Adj", "HPI_Adj", "Term_Deposit_Adj", "HPI_Ryield_Adj"),
                    levels = c("All_Ords_Adj", "All_Ords_Acc_Adj", "Gold_Adj", "HPI_Adj", "Term_Deposit_Adj", "HPI_Ryield_Adj"),
@@ -14,7 +14,7 @@ Leveler <- Index
 
 df_colours <- data.frame(Index, colours)
 
-raw_df <- readxl::read_xlsx(path = path, sheet = 3)
+raw_df <- readxl::read_xlsx(path = path, sheet = 1)
 
 raw_df2 <- readxl::read_xlsx(path = path, sheet = 4)
 

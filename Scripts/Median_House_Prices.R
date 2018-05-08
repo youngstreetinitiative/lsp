@@ -76,47 +76,53 @@ ggplot(data = df_growth, aes(x = Year, y = Growth_Rate)) +
   geom_point(aes(colour = Growth_City)) +
   geom_line(aes(group = Growth_City, colour = Growth_City), size = 1)
 
-ggplot(data = df_rolling_growth, aes(x = Year, y = Rolling_Growth)) +
+ggplot(data = df_rolling_growth, aes(x = Year, y = Rolling_Growth * 100)) +
   geom_point(data = df_rolling_growth2) +#, aes(colour = Roll_Growth_City)) +
   geom_line(aes(group = Roll_Growth_City, colour = Roll_Growth_City), size = 1.5) +
-  geom_dl(aes(colour = Roll_Growth_City, label = Roll_Growth_City),
+  geom_dl(aes(colour = Roll_Growth_City, label = str_replace_all(Roll_Growth_City, "RollMeanGrowth_", "")),
+          #label = "Sydney", "Melbourne", 'Australia',
           method = list("smart.grid")) +
-  geom_dl(data = df_rolling_growth2, aes(label = Roll_Growth_City),
+  geom_dl(data = df_rolling_growth2, aes(label = str_replace_all(Roll_Growth_City, "_", " ")),
           method = list("last.points", hjust = 1.8, vjust = -0.8)) +
-  ggtitle("Median House Price Growth in Major Australian Cities (Sydney, Melbourne, Brisbane and Perth)") +
+  ggtitle("7 Year Rolling Median House Price Growth in Major Australian Cities (Sydney, Melbourne, Brisbane and Perth)") +
   xlab("Year") +
-  ylab("Median Price Growth Rate") +
-  theme_minimal() +
+  ylab("Percentage \nGrowth Rate") +
+  theme_classic() +
   theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  scale_y_continuous(labels = percent) +
-  scale_x_continuous(breaks = seq(min(df_rolling_growth$Year), max(df_rolling_growth$Year), by = 5)) +
+  scale_y_continuous(labels = comma,
+                     sec.axis = dup_axis(),
+                     breaks = pretty_breaks(n = 7)) +
+  scale_x_continuous(breaks = seq(min(df_rolling_growth$Year), max(df_rolling_growth$Year), by = 2)) +
   scale_color_manual(name = "7 Year Rolling Growth Rate",
                   breaks = c("RollMeanGrowth_Sydney", "RollMeanGrowth_Melbourne", "RollMeanGrowth_Average"),
                   labels = c("Sydney", "Melbourne", "Average 4 Cities"),
                   values = c("#FFCC33", "#3399FF", "#FF3333")) +
-  theme(legend.position = c(0.8, 0.8),
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 12))
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
+  guides(colour = "none")
 
 ggsave(filename = paste(save_path, "7 Year Rolling Average Median House Price Growth in Major Cities", ".jpeg", sep = ""), width = 45, height = 20, units = "cm")
 
 df_median_prices <- df_median_growth %>% select(Year, Sydney, Melbourne, Brisbane, Perth) %>%
   gather(key = City, value = Median_Price, -Year)
 
-ggplot(data = df_median_prices, aes(x = Year, y = Median_Price)) + geom_line(aes(group = City, colour = City), size = 1.5) +
+ggplot(data = df_median_prices, aes(x = Year, y = Median_Price / 1000000)) + geom_line(aes(group = City, colour = City), size = 1.5) +
   geom_dl(aes(colour = City, label = City),
           method = list("smart.grid")) +
-  ggtitle("Median House Prices in Major Cities") +
+  ggtitle("Annual Median House Prices in Major Cities (Nominal Prices)") +
   xlab("Year") +
-  ylab("Median House Price") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  scale_y_continuous(labels = dollar) +
+  ylab(" Median House\nPrice $m") +
+  theme_classic() +
+  scale_y_continuous(labels = comma,
+                     sec.axis = dup_axis()) +
   scale_x_continuous(breaks = seq(min(df_median_prices$Year), max(df_median_prices$Year), by = 5)) +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
   scale_color_manual(name = "City",
                      breaks = c("Sydney", "Melbourne", "Brisbane", "Perth"),
-                     labels = c("Sydney", "Melbourne", "Brisbane", "Perth"),
-                     values = c("#006633", "#FFCC33", "#3399FF", "#FF3333")) +
+                     values = c("#FF6633", "#FFCC33", "#3399FF", "#FF3333")) +
   guides(colour = "none")
 
 ggsave(filename = paste(save_path, "Median House Prices in Major Cities", ".jpeg", sep = ""), width = 45, height = 20, units = "cm")

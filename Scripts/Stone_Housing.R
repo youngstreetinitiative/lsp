@@ -1,6 +1,6 @@
 #This Script is for creating graphs for Stone's Chapter on Housing
 
-path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Income-Wealth Distribution & Inequality/Working files/Working Data/Household_Income_Cube.xlsx"
+path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Household Incomes-Wealth & Inequality/Working files/Working Data/Household_Income_Cube.xlsx"
 
 save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Economy/Narrative and Package/Andrews Mod/Chptr3_Housing Market/Images/"
 

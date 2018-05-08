@@ -1,10 +1,10 @@
 
 #This is just inputting the data and setting up the tables to run the regressions and graph from
 
-path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/House Data R Working Cube.xlsx"
-path2 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/HPI and RBA Cash Rate_12022018.xlsx"
+path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/Working Data/House Data R Working Cube.xlsx"
+path2 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/Working Data/HPI and RBA Cash Rate_12022018.xlsx"
 
-save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/R images/"
+save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/R images/"
 
 
 raw_input <- readxl::read_xlsx(path = path, sheet = 1)

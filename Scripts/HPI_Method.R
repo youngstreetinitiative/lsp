@@ -3,9 +3,9 @@
 library(directlabels)
 library(ggplot2)
 
-path1 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/Working Data/House Data R Working Cube.xlsx"
+path1 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/Working Data/House Data R Working Cube.xlsx"
 
-save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Immanuel & Alex)/Working Files/R images/"
+save_path <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/R images/"
 
 raw_input <- readxl::read_xlsx(path = path1, sheet = 1)
 
@@ -20,22 +20,33 @@ df_HPI <- rbind(df_HPI,
                            HPI = 100,
                            Series = "Abelson"))
 
+colours <- c("#FF6633", "#6699CC")
+names(colours) <- c("Abelson", "ABS")
+
 ggplot2::ggplot(data = df_HPI, aes(x = Year, y = HPI)) +
   geom_line(aes(group = Series, colour = Series), size = 1.5) +
   geom_dl(aes(colour = Series, label = Series), method = list("smart.grid")) +
   ggtitle("Different Concatenated HPI Series") +
-  xlab("Date") +
-  ylab("House Price Indices") +
+  xlab("") +
+  ylab("House Price \nIndices") +
   scale_x_continuous(breaks = seq(min(df_HPI$Year), max(df_HPI$Year), by = 2)) +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  theme_minimal() +
+  scale_y_continuous(labels = comma,
+                     expand = c(0, 0),
+                     sec.axis = dup_axis(),
+                     breaks = pretty_breaks(n = 3)) +
+  theme_classic() +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 0, hjust = 1)) +
+  scale_colour_manual(values = colours) +
   guides(colour = "none")
 
 ggsave(filename = paste(save_path,
                         "Different Concatenated HPI Series",
                         ".jpeg",
                         sep = ""),
-       width = 35, height = 20, units = "cm")
+       width = 50, height = 25, units = "cm")
 
 
 df_HPI_check <- raw_input %>% select(Year, `HPI AUS`) %>%
@@ -72,12 +83,18 @@ ggplot2::ggplot(data = df_comparison, aes(x = as.Date(Date), y = HPI)) +
   geom_line(aes(group = City, colour = City), size = 1.5) +
   geom_dl(aes(colour = City, label = City), method = list("smart.grid")) +
   ggtitle("Comparison of HPIs") +
-  xlab("Date") +
+  xlab("") +
   ylab("HPIs") +
   scale_x_date(date_breaks = "10 months",
                labels = date_format("%Y-%m")) +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  theme_minimal() +
+  scale_y_continuous(labels = comma,
+                     sec.axis = dup_axis(),
+                     expand = c(0 ,0),
+                     breaks = pretty_breaks(n = 7)) +
+  theme_classic() +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
   guides(colour = "none")
 
 ggsave(filename = paste(save_path,
@@ -104,3 +121,32 @@ ggsave(filename = paste(save_path,
                         ".jpeg",
                         sep = ""),
        width = 35, height = 20, units = "cm")
+
+
+path2 <- "C:/Users/User/Dropbox (YSI)/YSI Team Folder/Content/Housing Affordability Product/Housing Pitch Work (Millard & Whitehair 2018)/Working Files/Working Data/HPI_Methodology.xlsx"
+
+raw_input <- readxl::read_xlsx(path = path2, sheet = 1)
+
+df <- raw_input %>% filter(str_detect(Date, "06")) %>%
+  select(Date, OLD_ABS_Adj, NEW_ABS_Adj, ABELSON_Adj) %>%
+  `colnames<-`(c("Date", "Old_ABS", "New_ABS", "Abelson")) %>%
+  gather(key = Series, value = Index, -Date) %>%
+  filter(Series != "Old_ABS")
+
+
+ggplot2::ggplot(data = df, aes(x = as.Date(Date), y = Index)) +
+  geom_line(aes(group = Series, colour = Series), size = 1) +
+  geom_dl(aes(colour = Series, label = Series), method = list("smart.grid")) +
+  ggtitle("Comparison of Different EHPI Methods/Sources") +
+  xlab("") +
+  ylab("Index") +
+  scale_y_continuous(labels = comma,
+                     sec.axis = dup_axis(),
+                     expand = c(0 ,0),
+                     breaks = pretty_breaks(n = 7)) +
+  scale_x_date(labels = date_format("%Y")) +
+  theme_classic() +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
+  guides(colour = "none")

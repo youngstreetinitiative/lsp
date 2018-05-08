@@ -28,20 +28,25 @@ ggplot2::ggplot(data = df_turnover, aes(x = Year, y = `Percentage of Turnover`))
 ggplot2::ggsave(filename = paste(save_path, "Percentage of Total Residential Dwellings Annual Turnover", ".jpeg", sep = ""), width = 35, height = 20, units = "cm")
 
 df_turnover2 <- df %>% select(Year, `Total Dwelling Transfers Aus`) %>%
-  filter(Year >= 2002) %>%
+  filter(Year >= 2003,
+         Year < 2017) %>%
   gather(key = Transfers, value = Number, -Year)
 
 ggplot2::ggplot(data = df_turnover2, aes(x = Year, y = Number)) +
   geom_line(aes(group = Transfers, colour = Transfers), size = 1.5) +
   geom_dl(aes(colour = Transfers, label = Transfers),
           method = list("last.points", hjust = 1.5, vjust = -1.8)) +
-  xlab("Year") +
+  xlab("") +
   ylab("Number of Transfers") +
   ggtitle("Number of Residential Dwelling Transfers") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
+  theme_classic() +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
   scale_colour_brewer(palette = "Paired") +
-  scale_y_continuous(labels = comma) +
+  scale_y_continuous(labels = comma,
+                     expand = c(0, 0),
+                     sec.axis = dup_axis()) +
   scale_x_continuous(breaks = seq(min(df_turnover2$Year), max(df_turnover2$Year), by = 2)) +
   guides(colour = "none")
 
@@ -60,12 +65,16 @@ ggplot(data = df_hpigrowth, aes(x = Year, y = Growth)) +
   geom_line(aes(group = Category, colour = Category), size = 1.5) +
   geom_dl(aes(colour = Category, label = Category),
           method = list("last.points", hjust = 1.5, vjust = -3.5)) +
-  xlab("Year") +
+  xlab("") +
   ylab("HPI Growth") +
   ggtitle("The Growth of the Australian House Price Index") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 0, hjust = 1)) +
-  scale_y_continuous(labels = percent) +
+  theme_classic() +
+  theme(axis.title.y = element_text(margin = margin(t = 10), angle = 0),
+        axis.title.y.right = element_text(margin = margin(t = 10), angle = 0, vjust = 1),
+        plot.title = element_text(hjust = 0.5)) +
+  scale_y_continuous(labels = percent,
+                     expand = c(0, 0),
+                     sec.axis = dup_axis()) +
   scale_x_continuous(breaks = seq(min(df_hpigrowth$Year), max(df_hpigrowth$Year), by = 2)) +
   guides(colour = "none") +
   geom_hline(data = cutoff, aes(yintercept = yintercept, linetype = cutoff), show.legend = FALSE)
