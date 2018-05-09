@@ -38,7 +38,7 @@ paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 # Data References
 ```{r results="asis",echo=FALSE}
 # Prints out the table of sources used to make graphs
-kable(select(GraphSources, ReferencePrintOut),
+kable(select(GraphSources, ReferencePrintOut) %>% distinct,
       col.names = "Data Sources",
       format = "markdown")
 ```

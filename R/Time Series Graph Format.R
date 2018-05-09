@@ -196,7 +196,7 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
     FormArrange <- grid.arrange(
 
     textGrob(title,
-             gp = gpar(fontsize = 16)),
+             gp = gpar(fontsize = 13)),
     textGrob(subtitle,
              gp = gpar(fontsize = 10)),
     grobTree(
@@ -228,7 +228,7 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
       grobTree(
         textGrob(""),
         textGrob(title,
-             gp = gpar(fontsize = 16)),
+             gp = gpar(fontsize = 13)),
         rasterGrob(YSILogo,
                    x = unit(1, "npc"),
                    height = 1,
@@ -257,6 +257,6 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
     heights = c(0.08, 0.02, 0.02, 0.8, 0.03, 0.05))
   }
 
-  return(FormArrange)
+  return(invisible(FormArrange))
 
 }

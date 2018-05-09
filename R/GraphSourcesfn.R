@@ -88,11 +88,13 @@ RefCaption <- function(TableNames = NULL){
   caption <- paste("Source:", gsub("\\\"|c|\\(|\\)","",
                                  paste(GraphSources %>%
                                          filter(Table == TableNames) %>%
+                                         distinct %>%
                                          select(Reference))))
   }else{
     caption <- paste("Sources:", gsub("\\\"|c|\\(|\\)","",
                                       paste(GraphSources %>%
                                               filter(Table %in% TableNames) %>%
+                                              distinct %>%
                                               select(Reference))))
   }
   return(caption)
