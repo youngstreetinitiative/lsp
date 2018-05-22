@@ -57,6 +57,8 @@ sheet_check <- function(path = NULL) {
     sh_type <- "Multi_Table"
   } else if (str_detect(x, "Index")) {
     sh_type <- "Index"
+  } else if (str_detect(x, "Data")) {
+    sh_type <- "Data"
   } else {
     sh_type <- "Other"
   }
@@ -101,6 +103,10 @@ sheet_namer <- function(master_list = NULL, var_meta = NULL) {
     sheet_names <- master_list$file_path %>%
       excel_sheets() %>%
       .[!. %in% c("Contents", "Content", "Explanatary Notes")]
+  } else {
+    sheet_names <- master_list$file_path %>%
+      excel_sheets %>%
+      .[!. %in% c("Notes")]
   }
 
   return(sheet_names)

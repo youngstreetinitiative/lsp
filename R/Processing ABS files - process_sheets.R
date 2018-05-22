@@ -6,6 +6,7 @@
 #' @param LookForIndustry Logical: enables the process to look for possible columns and row variables which define the industry for the variable from which it creates another column vector on working_tbl with industry abbreviations as how they conform to ANZIC categories.
 #' @return a data frame
 #' @export
+#'
 
 
 process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALSE) {
