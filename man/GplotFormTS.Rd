@@ -7,6 +7,17 @@
 GplotFormTS(Facet = FALSE, Yaxis = "", YBreaks = 0, yintercept0 = FALSE,
   XyrBreaks = NA)
 }
+\arguments{
+\item{Facet}{add desc here}
+
+\item{Yaxis}{add desc here}
+
+\item{YBreaks}{add desc here}
+
+\item{yintercept0}{add desc here}
+
+\item{XyrBreaks}{add desc here}
+}
 \value{
 GGplot format
 }

@@ -1,7 +1,10 @@
 #'  Graph Format templates
 #'
 #' @name GFormTS
-#' @param
+#' @param Facet add desc here
+#' @param Yaxis add desc here
+#' @param YBreaks add desc here
+#' @param yintercept0 add desc here
 #' @return GGplot format
 #' @export
 
@@ -86,14 +89,22 @@ GFormTS <- function(Facet = FALSE, Yaxis = "", YBreaks = 0, yintercept0 = TRUE){
 #'  Graph Format template 2
 #'
 #' @name GplotFormTS
-#' @param
+#' @param Facet add desc here
+#' @param Yaxis add desc here
+#' @param YBreaks add desc here
+#' @param yintercept0 add desc here
+#' @param XyrBreaks add desc here
 #' @return GGplot format
 #' @export
 
 
-GplotFormTS <- function(Facet = FALSE,
-                        Yaxis = "", YBreaks = 0, yintercept0 = FALSE,
-                        XyrBreaks = NA){
+GplotFormTS <- function(
+  Facet = FALSE,
+  Yaxis = "",
+  YBreaks = 0,
+  yintercept0 = FALSE,
+  XyrBreaks = NA
+){
 
     # Graph formats for singular graphs
     GFormTS <- ggplot() +
@@ -166,7 +177,15 @@ GplotFormTS <- function(Facet = FALSE,
 #'  Graph Format templates
 #'
 #' @name FormArrange
-#' @param
+#' @param GGOutput add desc here
+#' @param InclColGuide add desc here
+#' @param InclFillGuide add desc here
+#' @param title add desc here
+#' @param subtitle add desc here
+#' @param Ytitle add desc here
+#' @param Ytitle2 add desc here
+#' @param caption add desc here
+#' @param InclLogo add desc here
 #' @return Image output of arranged components of a graph
 #' @export
 
