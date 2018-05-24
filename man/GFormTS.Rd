@@ -6,6 +6,15 @@
 \usage{
 GFormTS(Facet = FALSE, Yaxis = "", YBreaks = 0, yintercept0 = TRUE)
 }
+\arguments{
+\item{Facet}{add desc here}
+
+\item{Yaxis}{add desc here}
+
+\item{YBreaks}{add desc here}
+
+\item{yintercept0}{add desc here}
+}
 \value{
 GGplot format
 }

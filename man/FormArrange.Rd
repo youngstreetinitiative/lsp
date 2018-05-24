@@ -5,8 +5,27 @@
 \title{Graph Format templates}
 \usage{
 FormArrange(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = FALSE,
-  title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NULL,
+  title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NA,
   caption = NULL, InclLogo = FALSE)
+}
+\arguments{
+\item{GGOutput}{add desc here}
+
+\item{InclColGuide}{add desc here}
+
+\item{InclFillGuide}{add desc here}
+
+\item{title}{add desc here}
+
+\item{subtitle}{add desc here}
+
+\item{Ytitle}{add desc here}
+
+\item{Ytitle2}{add desc here}
+
+\item{caption}{add desc here}
+
+\item{InclLogo}{add desc here}
 }
 \value{
 Image output of arranged components of a graph
