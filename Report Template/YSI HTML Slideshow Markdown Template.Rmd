@@ -16,7 +16,7 @@ library(lsp)
 # Load the Dropbox directory from which to draw and save objects
 paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 ```
-<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+
 
 <!-- guide to using Slidy presentations http://rmarkdown.rstudio.com/slidy_presentation_format.html -->
 
@@ -25,12 +25,15 @@ paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 #Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/Economy/Growth/Productivity/Data/For R Analysis TEST")
 ```
 
-# Section 1
+# Slide 1
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+```{r echo=FALSE, error=F, message=F, warning=F}
 
-## Section 1.1
+```
 
-
-```{r echo=FALSE, error=F, message=F, warning=F, fig.width=10, fig.height=7}
+# Slide 2
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+```{r echo=FALSE, error=F, message=F, warning=F}
 
 ```
 

@@ -1,118 +1,39 @@
-#'  Graph Format templates
-#'
-#' @name GFormTS
-#' @param
-#' @return GGplot format
-#' @export
-
-
-GFormTS <- function(Facet = FALSE, Yaxis = "", YBreaks = 0, yintercept0 = TRUE){
-  ## Loading in graph formats
-  GFormTS <- ggplot()+
-    labs(x = NULL, y = NULL, fill = NULL, colour = NULL)
-
-  if(Facet == FALSE){
-    if(YBreaks == 0){
-      YBreaks <- 6
-    }
-
-    # Graph formats for singular graphs
-    GFormTS <- GFormTS +
-      theme_minimal(base_size = 12) +
-      theme(plot.caption = element_text(hjust = 0,
-                                        size = 10)) +
-      scale_x_date(date_breaks = "2 years",
-                   date_labels = "%Y")
-
-    if(Yaxis == "dollar"){
-      GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = dollar)
-    }else if(Yaxis == "percent"){
-      GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = percent)
-      if(yintercept0){
-        GFormTS <- GFormTS +
-          geom_hline(yintercept = 0)
-      }
-    }else if(Yaxis == "index"){
-      GFormTS <- GFormTS +
-        geom_hline(yintercept = 100)
-    }
-  }else{
-    if(YBreaks == 0){
-      YBreaks <- 4
-    }
-    # Graph formats for facetted graphs
-
-    GFormTS <- GFormTS +
-      theme_minimal(base_size = 12) +
-      theme(plot.caption = element_text(hjust = 0,
-                                        size = 10)) +
-      scale_x_date(date_breaks = "5 years",
-                   date_labels = "%Y")
-    if(Yaxis == "dollar"){
-      GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = dollar)
-    }else if(Yaxis == "percent"){
-      GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = percent)
-      if(yintercept0){
-        GFormTS <- GFormTS +
-          geom_hline(yintercept = 0)
-      }
-    }else if(Yaxis == "index"){
-      GFormTS <- GFormTS +
-        geom_hline(yintercept = 100) +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks))
-    }
-  }
-
-  # # Attaching YSI logo and sources caption
-  # GFormTS <- gtable_add_rows(GFormTS, heights = unit(1, "inch"))
-  # GFormTS <- gtable_add_grob(GFormTS, "YSI.png", nrow(GFormTS), 1, nrow(GFormTS), ncol(GFormTS))
-  #
-  # # Turn off clipping
-  # GFormTS <- ggplot_gtable(ggplot_build(GFormTS))
-  # GFormTS$layout$clip[GFormTS$layout$name == "panel"] <- "off"
-
-  return(GFormTS)
-
-}
-
 #'  Graph Format template 2
 #'
 #' @name GplotFormTS
-#' @param
+#' @param YBreaks Number of Y-axis breaks (as a guide for pretty_breaks)
+#' @param XyrBreaks Distance between year breaks
+#' @param Facet Logical. True if the plot is facetted. Sets the Year breaks to be further apart.
+#' @param Index Place a horizontal line at height 100 for index measures
+#' @param yintercept0 Place a horizontal line at the zero point
+#' @param TextSize Size of axis labels (uses base_size inside theme_classic)
 #' @return GGplot format
 #' @export
+#'
 
 
-GplotFormTS <- function(Facet = FALSE,
-                        Yaxis = "", YBreaks = 0, yintercept0 = FALSE,
-                        XyrBreaks = NA){
+GplotFormTS <- function(YBreaks = NA, XyrBreaks = NA, Facet = FALSE,
+                        Index = FALSE, yintercept0 = FALSE,
+                        ExpandToMargins = FALSE, TextSize = 16){
 
     # Graph formats for singular graphs
     GFormTS <- ggplot() +
     labs(x = NULL, y = NULL, fill = NULL, colour = NULL) +
-      theme_classic(base_size = 12) +
+      theme_classic(base_size = TextSize) +
       theme(strip.background = element_rect(colour = "white"))
 
     # Standard x and y breaks for facetted and singular graphs
      if(Facet == FALSE){
-       if(YBreaks == 0){
-         YBreaks <- 6
+       if(is.na(YBreaks)){
+         YBreaks <- 4
          }
        GFormTS <- GFormTS +
-         scale_x_date(date_breaks = "2 years",
+         scale_x_date(date_breaks = "3 years",
                       date_labels = "%Y")
        }else{
          # Graph formats for facetted graphs
-         if(YBreaks == 0){
-           YBreaks <- 4
+         if(is.na(YBreaks)){
+           YBreaks <- 3
            }
          GFormTS <- GFormTS +
            scale_x_date(date_breaks = "5 years",
@@ -132,33 +53,22 @@ GplotFormTS <- function(Facet = FALSE,
           geom_hline(yintercept = 0)
         }
 
-    # Set y axis labels
-    if(Yaxis == "dollar"){
+    # Add a line at 100 for index
+    if(Index){
       GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = dollar,
-                           sec.axis = dup_axis(name = NULL),
-                           expand = c(0, 0))
-    }else if(Yaxis == "percent"){
-      GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = percent,
-                           sec.axis = dup_axis(name = NULL),
-                           expand = c(0, 0))
-    }else if(Yaxis == "index"){
-      GFormTS <- GFormTS +
-        geom_hline(yintercept = 100) +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           sec.axis = dup_axis(name = NULL),
-                           expand = c(0, 0))
+        geom_hline(yintercept = 100)
+    }
 
+    # Use the expand option to extend the data to the margins
+    if(ExpandToMargins){
+      GFormTS <- GFormTS +
+        scale_y_continuous(breaks = pretty_breaks(YBreaks),
+                           expand = c(0, 0))
     }else{
       GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks),
-                           labels = unit_format(unit = Yaxis, sep = ""),
-                           sec.axis = dup_axis(name = NULL),
-                           expand = c(0, 0))
+        scale_y_continuous(breaks = pretty_breaks(YBreaks))
     }
+
   return(GFormTS)
 }
 
@@ -166,21 +76,26 @@ GplotFormTS <- function(Facet = FALSE,
 #'  Graph Format templates
 #'
 #' @name FormArrange
-#' @param
+#' @param GGOutput ggplot object
+#' @param InclColGuide Logical. Include the colour guide for line and point plots
+#' @param InclFillGuide Logical. Include the colour guide for bar and histogram plots
+#' @param title Plot title sitting top and centre of glob output
+#' @param subtitle Plot subtitle in smaller font below the plot title
+#' @param Ytitle Y-axis title placed above the axis line and duplicated on both left and right
+#' @param Ytitle2 Second Y-axis title for the right side, if it is different from the left side
+#' @param caption Text for the plot caption placed below the GGOutput plot
+#' @param InclLogo Logical. Include the YSI logo in the top right corner of the output
+#' @param TitleSize Font size of title text
+#' @param TextSize Font size of y axis titles, subtitle and caption
 #' @return Image output of arranged components of a graph
 #' @export
+#'
 
 
 FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = FALSE,
-                        title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NA,
-                        caption = NULL, InclLogo = FALSE){
-
-  ## If there is not a specified second Y axis, duplicate the name of the first Y axis
-  if(is.na(Ytitle2)){
-    Ytitle2Adj <- Ytitle
-  } else {
-    Ytitle2Adj <- Ytitle2
-  }
+                        title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = "",
+                        caption = NULL, InclLogo = FALSE,
+                        TitleSize = 15, TextSize = 12, CaptionSize = 8){
 
   ## Removing guides when not specified to include
   if(InclColGuide == FALSE){
@@ -196,27 +111,27 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
     FormArrange <- grid.arrange(
 
     textGrob(title,
-             gp = gpar(fontsize = 13)),
+             gp = gpar(fontsize = TitleSize)),
     textGrob(subtitle,
-             gp = gpar(fontsize = 10)),
+             gp = gpar(fontsize = TextSize)),
     grobTree(
       textGrob(Ytitle,
-             gp = gpar(fontsize = 10),
+             gp = gpar(fontsize = TextSize),
              x = unit(0, "npc"),
              just = c("left", "bottom")),
-      textGrob(Ytitle2Adj,
-               gp = gpar(fontsize = 10),
+      textGrob(Ytitle2,
+               gp = gpar(fontsize = TextSize),
                  x = unit(1, "npc"),
                just = c("right", "bottom"))),
     GGOutput,
     textGrob(""),
     textGrob(caption,
-             gp = gpar(fontsize = 9),
+             gp = gpar(fontsize = CaptionSize),
              x = unit(0, "npc"),
              just = c("left", "bottom"),
              hjust = 0),
     ncol = 1,
-    heights = c(0.08, 0.02, 0.02, 0.8, 0.03, 0.05))
+    heights = c(0.1, 0.02, 0.1, 0.7, 0.03, 0.05))
 
   }else{
 
@@ -228,28 +143,28 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
       grobTree(
         textGrob(""),
         textGrob(title,
-             gp = gpar(fontsize = 13)),
+             gp = gpar(fontsize = TitleSize)),
         rasterGrob(YSILogo,
                    x = unit(1, "npc"),
                    height = 1,
                    hjust = 1)),
       textGrob(subtitle,
-             gp = gpar(fontsize = 10)),
+             gp = gpar(fontsize = TextSize)),
       grobTree(
       textGrob(Ytitle,
-               gp = gpar(fontsize = 10),
+               gp = gpar(fontsize = TextSize),
                x = unit(0, "npc"),
                just = c("left", "bottom"),
                hjust = 0),
-      textGrob(Ytitle2Adj,
-               gp = gpar(fontsize = 10),
+      textGrob(Ytitle2,
+               gp = gpar(fontsize = TextSize),
                x = unit(1, "npc"),
                just = c("right", "bottom"),
                hjust = 1)),
     GGOutput,
     textGrob(""),
     textGrob(caption,
-             gp = gpar(fontsize = 9),
+             gp = gpar(fontsize = CaptionSize),
              x = unit(0, "npc"),
              just = c("left", "bottom"),
              hjust = 0),
