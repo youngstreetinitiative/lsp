@@ -6,6 +6,7 @@
 #' @param Facet Logical. True if the plot is facetted. Sets the Year breaks to be further apart.
 #' @param Index Place a horizontal line at height 100 for index measures
 #' @param yintercept0 Place a horizontal line at the zero point
+#' @param ExpandToMargins Set distance between data points and axes to zero by setting expand = c(0, 0)
 #' @param TextSize Size of axis labels (uses base_size inside theme_classic)
 #' @return GGplot format
 #' @export

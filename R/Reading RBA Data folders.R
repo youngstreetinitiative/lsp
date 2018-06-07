@@ -1,12 +1,15 @@
 #' @name Bundle_RBA_Sheets
 #' @param DropboxDataFolder Address for folder containing RBA file locations with file paths saved as the object 'file_path' (and other meta information) created by the Bundle_RBA_Sheets function
+#' @param ListName Names for the output list
 #' @param InclVarMeta Logical: include the variable information as columns in working_tbl.
 #' @return a list of lists of data frames
 #' @export
 #'
 
 
-Bundle_RBA_Sheets <- function(DropboxDataFolder = NULL, InclVarMeta = FALSE) {
+Bundle_RBA_Sheets <- function(DropboxDataFolder = NULL,
+                              ListName = NULL,
+                              InclVarMeta = FALSE) {
 
 
   if (!is.null(DropboxDataFolder)) {
@@ -33,6 +36,7 @@ Bundle_RBA_Sheets <- function(DropboxDataFolder = NULL, InclVarMeta = FALSE) {
     rdspath <- glue("{DropboxDir}/master_ls.rds")
     write_rds(master_ls, rdspath)
     master_list <<- read_rds(rdspath)
+    assign(ListName, master_list, envir = globalenv())
   }
 
 }

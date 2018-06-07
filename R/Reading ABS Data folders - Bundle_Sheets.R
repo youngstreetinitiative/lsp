@@ -1,13 +1,17 @@
 
 #' @name Bundle_Sheets
 #' @param DropboxDataFolder Address for folder containing ABS file locations with file paths saved as the object 'file_path' (and other meta information) created by the Bundle_RBA_Sheets function
+#' @param ListName Names for the output list
 #' @param InclVarMeta Logical: include the variable information as columns in working_tbl.
 #' @param LookForIndustry Logical: enables the process to look for possible columns and row variables which define the industry for the variable from which it creates another column vector on working_tbl with industry abbreviations as how they conform to ANZIC categories.
 #' @return a list of lists of data frames
 #' @export
 #'
 
-Bundle_Sheets <- function(DropboxDataFolder = NULL, InclVarMeta = FALSE, LookForIndustry = FALSE) {
+Bundle_Sheets <- function(DropboxDataFolder = NULL,
+                          ListName = NULL,
+                          InclVarMeta = FALSE,
+                          LookForIndustry = FALSE) {
 
 
   if (!is.null(DropboxDataFolder)) {
@@ -36,6 +40,7 @@ Bundle_Sheets <- function(DropboxDataFolder = NULL, InclVarMeta = FALSE, LookFor
     rdspath <- glue("{DropboxDir}/master_ls.rds")
     write_rds(master_ls, rdspath)
     master_list <<- read_rds(rdspath)
+    assign(ListName, master_list, envir = globalenv())
 
   } else {
     files <- list.files("data-raw") %>%
@@ -53,5 +58,6 @@ Bundle_Sheets <- function(DropboxDataFolder = NULL, InclVarMeta = FALSE, LookFor
       set_names(nms)
     write_rds(master_ls, "data/master_ls.rds")
     master_list <<- read_rds("data/master_ls.rds")
+    assign(ListName, master_list, envir = globalenv())
   }
 }
