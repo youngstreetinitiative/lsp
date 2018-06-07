@@ -5,8 +5,32 @@
 \title{Graph Format templates}
 \usage{
 FormArrange(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = FALSE,
-  title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = NULL,
-  caption = NULL, InclLogo = FALSE)
+  title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = "",
+  caption = NULL, InclLogo = FALSE, TitleSize = 15, TextSize = 12,
+  CaptionSize = 8)
+}
+\arguments{
+\item{GGOutput}{ggplot object}
+
+\item{InclColGuide}{Logical. Include the colour guide for line and point plots}
+
+\item{InclFillGuide}{Logical. Include the colour guide for bar and histogram plots}
+
+\item{title}{Plot title sitting top and centre of glob output}
+
+\item{subtitle}{Plot subtitle in smaller font below the plot title}
+
+\item{Ytitle}{Y-axis title placed above the axis line and duplicated on both left and right}
+
+\item{Ytitle2}{Second Y-axis title for the right side, if it is different from the left side}
+
+\item{caption}{Text for the plot caption placed below the GGOutput plot}
+
+\item{InclLogo}{Logical. Include the YSI logo in the top right corner of the output}
+
+\item{TitleSize}{Font size of title text}
+
+\item{TextSize}{Font size of y axis titles, subtitle and caption}
 }
 \value{
 Image output of arranged components of a graph

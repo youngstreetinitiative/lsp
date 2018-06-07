@@ -3,7 +3,7 @@ Title: working with the sheets
 Version: 0.0.1
 Authors@R: person("Ysi", "Peeps", email = "first.last@example.com", role = c("aut", "cre"))
 Description: working with the sheets
-Depends: tidyverse, stringr, glue, readxl, qdapRegex, scales, gridExtra, lubridate, knitr, kableExtra, directlabels, plotly, grid, png
+Depends: tidyverse, stringr, glue, readxl, qdapRegex, scales, gridExtra, lubridate, knitr, kableExtra, directlabels, plotly, grid
 Imports: qdapRegex
 License: MIT
 Encoding: UTF-8

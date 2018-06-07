@@ -13,9 +13,13 @@
 #'
 
 
-GplotFormTS <- function(YBreaks = NA, XyrBreaks = NA, Facet = FALSE,
-                        Index = FALSE, yintercept0 = FALSE,
-                        ExpandToMargins = FALSE, TextSize = 16){
+GplotFormTS <- function(YBreaks = NA,
+                        XyrBreaks = NA,
+                        Facet = FALSE,
+                        Index = FALSE,
+                        yintercept0 = FALSE,
+                        ExpandToMargins = FALSE,
+                        TextSize = 16){
 
     # Graph formats for singular graphs
     GFormTS <- ggplot() +
@@ -93,10 +97,18 @@ GplotFormTS <- function(YBreaks = NA, XyrBreaks = NA, Facet = FALSE,
 #'
 
 
-FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = FALSE,
-                        title = NULL, subtitle = NULL, Ytitle = NULL, Ytitle2 = "",
-                        caption = NULL, InclLogo = FALSE,
-                        TitleSize = 15, TextSize = 12, CaptionSize = 8){
+FormArrange <- function(GGOutput = NULL,
+                        InclColGuide = FALSE,
+                        InclFillGuide = FALSE,
+                        title = NULL,
+                        subtitle = NULL,
+                        Ytitle = NULL,
+                        Ytitle2 = "",
+                        caption = NULL,
+                        InclLogo = FALSE,
+                        TitleSize = 15,
+                        TextSize = 12,
+                        CaptionSize = 8){
 
   ## Removing guides when not specified to include
   if(InclColGuide == FALSE){
@@ -108,7 +120,7 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
       guides(fill = "none")
   }
 
-  if(InclLogo == FALSE){
+  # if(InclLogo == FALSE){
     FormArrange <- grid.arrange(
 
     textGrob(title,
@@ -134,44 +146,44 @@ FormArrange <- function(GGOutput = NULL, InclColGuide = FALSE, InclFillGuide = F
     ncol = 1,
     heights = c(0.1, 0.02, 0.1, 0.7, 0.03, 0.05))
 
-  }else{
-
-    if(!exists("YSILogo")){
-      YSILogo <<- readPNG(paste0(UserDir, "/Dropbox (YSI)/YSI Team Folder/PowerPoint templates/YSIGraph.png"))
-    }
-
-    FormArrange <- grid.arrange(
-      grobTree(
-        textGrob(""),
-        textGrob(title,
-             gp = gpar(fontsize = TitleSize)),
-        rasterGrob(YSILogo,
-                   x = unit(1, "npc"),
-                   height = 1,
-                   hjust = 1)),
-      textGrob(subtitle,
-             gp = gpar(fontsize = TextSize)),
-      grobTree(
-      textGrob(Ytitle,
-               gp = gpar(fontsize = TextSize),
-               x = unit(0, "npc"),
-               just = c("left", "bottom"),
-               hjust = 0),
-      textGrob(Ytitle2,
-               gp = gpar(fontsize = TextSize),
-               x = unit(1, "npc"),
-               just = c("right", "bottom"),
-               hjust = 1)),
-    GGOutput,
-    textGrob(""),
-    textGrob(caption,
-             gp = gpar(fontsize = CaptionSize),
-             x = unit(0, "npc"),
-             just = c("left", "bottom"),
-             hjust = 0),
-    ncol = 1,
-    heights = c(0.08, 0.02, 0.02, 0.8, 0.03, 0.05))
-  }
+  # }else{
+  #
+  #   if(!exists("YSILogo")){
+  #     YSILogo <<- readPNG(paste0(UserDir, "/Dropbox (YSI)/YSI Team Folder/PowerPoint templates/YSIGraph.png"))
+  #   }
+  #
+  #   FormArrange <- grid.arrange(
+  #     grobTree(
+  #       textGrob(""),
+  #       textGrob(title,
+  #            gp = gpar(fontsize = TitleSize)),
+  #       rasterGrob(YSILogo,
+  #                  x = unit(1, "npc"),
+  #                  height = 1,
+  #                  hjust = 1)),
+  #     textGrob(subtitle,
+  #            gp = gpar(fontsize = TextSize)),
+  #     grobTree(
+  #     textGrob(Ytitle,
+  #              gp = gpar(fontsize = TextSize),
+  #              x = unit(0, "npc"),
+  #              just = c("left", "bottom"),
+  #              hjust = 0),
+  #     textGrob(Ytitle2,
+  #              gp = gpar(fontsize = TextSize),
+  #              x = unit(1, "npc"),
+  #              just = c("right", "bottom"),
+  #              hjust = 1)),
+  #   GGOutput,
+  #   textGrob(""),
+  #   textGrob(caption,
+  #            gp = gpar(fontsize = CaptionSize),
+  #            x = unit(0, "npc"),
+  #            just = c("left", "bottom"),
+  #            hjust = 0),
+  #   ncol = 1,
+  #   heights = c(0.08, 0.02, 0.02, 0.8, 0.03, 0.05))
+  # }
 
   return(invisible(FormArrange))
 
