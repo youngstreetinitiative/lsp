@@ -2,7 +2,7 @@
 #' @name Bundle_Sheets
 #' @param DropboxDataFolder Address for folder containing ABS file locations with file paths saved as the object 'file_path' (and other meta information) created by the Bundle_RBA_Sheets function
 #' @param InclVarMeta Logical: include the variable information as columns in working_tbl.
-#' @param LookForIndustry Logical: enables the process to look for possible columns and row variables which define the industry for the variable from which it creates another column vector on working_tbl with industry abbreviations as how they conform to ANZIC categories.
+#' @param LookForIndustry Logical enables the process to look for possible columns and row variables which define the industry for the variable from which it creates another column vector on working_tbl with industry abbreviations as how they conform to ANZIC categories.
 #' @return a list of lists of data frames
 #' @export
 #'

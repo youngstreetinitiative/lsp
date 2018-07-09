@@ -4,20 +4,22 @@
 \alias{GraphSourcesfn}
 \title{Return a table with references for data on each table}
 \usage{
-GraphSourcesfn(TableName = NULL, Year = NULL, MasterList = TRUE,
-  MasterTbl = NULL, Source = NULL, Catalogue = NULL,
-  LongTableName = NULL)
+GraphSourcesfn(TableName = NULL, Data_List = master_list, SubTable = NA,
+  Year = NA, Table_No = NA, MasterList = TRUE, Source = NULL,
+  Catalogue = NA, LongTableName = NA)
 }
 \arguments{
-\item{MasterTbl}{Name of the master_list table}
+\item{Data_List}{Name of the master_list table}
+
+\item{SubTable}{Table withing Data_List working table is pulled from}
+
+\item{MasterList}{Logical: True if Table is in the master list}
 
 \item{Source}{Organisation which is the source of the data set}
 
 \item{Catalogue}{If there is a catelogue identifier write it in here}
 
 \item{LongTableName}{Long name of the data table, with spaces or underscores}
-
-\item{FromMasterList}{Logical: True if Table is in the master list}
 }
 \value{
 Data frame
