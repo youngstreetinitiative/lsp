@@ -40,7 +40,9 @@ Bundle_Sheets <- function(DropboxDataFolder = NULL,
     rdspath <- glue("{DropboxDir}/master_ls.rds")
     write_rds(master_ls, rdspath)
     master_list <<- read_rds(rdspath)
+    if (!is.null(ListName)){
     assign(ListName, master_list, envir = globalenv())
+    }
 
   } else {
     files <- list.files("data-raw") %>%
@@ -58,6 +60,8 @@ Bundle_Sheets <- function(DropboxDataFolder = NULL,
       set_names(nms)
     write_rds(master_ls, "data/master_ls.rds")
     master_list <<- read_rds("data/master_ls.rds")
+    if (!is.null(ListName)){
     assign(ListName, master_list, envir = globalenv())
+    }
   }
 }
