@@ -95,13 +95,13 @@ GraphSourcesfn <- function(TableName = NULL, Data_List = master_list, SubTable =
 
 RefCaption <- function(TableNames = NULL){
   if(length(TableNames) == 1){
-  caption <- paste("Source:", gsub("\\\"|c|\\(|\\)","",
+  caption <- paste("Source:", gsub("\\\"|c\\(|\\(|\\)","",
                                  paste(GraphSources %>%
                                          filter(Table == TableNames) %>%
                                          distinct %>%
                                          select(Reference))))
   }else{
-    caption <- paste("Sources:", gsub("\\\"|c|\\(|\\)","",
+    caption <- paste("Sources:", gsub("\\\"|c\\(|\\(|\\)","",
                                       paste(GraphSources %>%
                                               filter(Table %in% TableNames) %>%
                                               distinct %>%
