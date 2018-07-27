@@ -9,9 +9,15 @@ GraphSourcesfn(TableName = NULL, Data_List = master_list, SubTable = NA,
   Catalogue = NA, LongTableName = NA)
 }
 \arguments{
+\item{TableName}{Working data.frame name for data}
+
 \item{Data_List}{Name of the master_list table}
 
 \item{SubTable}{Table withing Data_List working table is pulled from}
+
+\item{Year}{Year of data release}
+
+\item{Table_No}{Table number}
 
 \item{MasterList}{Logical: True if Table is in the master list}
 
