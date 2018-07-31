@@ -1,10 +1,13 @@
-# This function is for the creation of a standard project folder
 
-library(lsp)
-
-UserDir <- "C:/Users/User"
-path <- "Documents/Primer_test"
-n <- "test_3"
+#' Initiate New Project Folders
+#'
+#' @name proj_primer
+#' @param UserDir Character vector of the user's primary drive dile pather, e.g C:/User/Users
+#' @param proj_path Character vector of the directory where the new project will be housed, e.g Documents/R/Projects
+#' @param proj_name Character vector of the name of the new project you are creating
+#' @return Creates a new set of directories in the desired location with included YSIcss.css and YSI.png files
+#' @export
+#'
 
 proj_primer <- function(UserDir = NULL, proj_path = NULL, proj_name = NULL) {
 
@@ -45,9 +48,4 @@ proj_primer <- function(UserDir = NULL, proj_path = NULL, proj_name = NULL) {
   projpath_literature <- paste(project_path, "literature", sep = "/")
   dir.create(projpath_literature)
 
-
 }
-
-
-proj_primer(UserDir, path, n)
-
