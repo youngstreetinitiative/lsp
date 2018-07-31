@@ -1,0 +1,47 @@
+---
+title: "HTML Markdown Template"
+author: ""
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+    self_contained: yes
+    css: "css/YSIcss.css
+    highlight: pygments
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Load the lsp package with useful packages and necessary YSI built functions
+library(lsp)
+# Load the Dropbox directory from which to draw and save objects
+# this happening automatically now?
+# paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
+```
+
+<img src="imgs/YSI.png" style="position:absolute;top:0px;right:0px;" />
+
+
+
+
+```{r echo = FALSE, error = F, message = F, warning = F}
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force")
+LabourForceList <- master_list
+rm(master_list)
+```
+
+
+```{r echo = FALSE, error = F, message = F, warning = F, fig.width = 7, fig.height = 5}
+
+```
+
+# Data References
+```{r results = "asis", echo = FALSE}
+# Prints out the table of sources used to make graphs
+kable(select(GraphSources, ReferencePrintOut) %>% distinct,
+      col.names = "Data Sources",
+      format = "markdown")
+```
