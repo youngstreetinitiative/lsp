@@ -9,7 +9,7 @@ output:
     toc_float: true
     number_sections: true
     self_contained: yes
-    css: YSIcss.css
+    css: css\YSIcss.css
     highlight: pygments
 ---
 
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = F, message=F, warning=F)
 library(lsp)
 ```
 <div style="position: fixed; top: 0; right: 0;">
-  ![](YSI.png)
+  ![](imgs\YSI.png)
 </div>
 
 ```{r}
