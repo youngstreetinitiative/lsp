@@ -14,34 +14,29 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = F, message=F, warning=F)
 # Load the lsp package with useful packages and necessary YSI built functions
 library(lsp)
-# Load the Dropbox directory from which to draw and save objects
-paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 ```
 <img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
 
 <!-- guides to using Beamer http://rmarkdown.rstudio.com/beamer_presentation_format.html#overview -->
 <!--  Themes/colors/fonts are here http://deic.uab.es/~iblanes/beamer_gallery/ -->
 
-```{r echo=FALSE, error=F, message=F, warning=F}
-# This is a test running of the Bundle_Sheets function drawing from a test folder of 3 differently formatted excel files from the ABS
-#Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/Economy/Growth/Productivity/Data/For R Analysis TEST")
+```{r}
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force",
+              ListName = "LabourForceList")
 ```
 
 # Section 1
 
-## Section 1.1
-
-
-```{r echo=FALSE, error=F, message=F, warning=F, fig.width=10, fig.height=7}
+```{r}
 
 ```
 
 
 # Data References
-```{r results="asis",echo=FALSE}
+```{r results="asis"}
 # Prints out the table of sources used to make graphs
 kable(select(GraphSources, ReferencePrintOut) %>% distinct,
       col.names = "Data Sources",

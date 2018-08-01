@@ -3,11 +3,12 @@
 #'  Return a table with references for data on each table
 #'
 #' @name GraphSourcesfn
-#' @param TableName
+#' @param TableName Working data.frame name for data
 #' @param Data_List Name of the master_list table
-#' @param MasterList Logical: True if Table is in the master list
 #' @param SubTable Table withing Data_List working table is pulled from
-
+#' @param Year Year of data release
+#' @param Table_No Table number
+#' @param MasterList Logical: True if Table is in the master list
 #' @param Source Organisation which is the source of the data set
 #' @param Catalogue If there is a catelogue identifier write it in here
 #' @param LongTableName Long name of the data table, with spaces or underscores

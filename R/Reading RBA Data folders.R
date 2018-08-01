@@ -1,3 +1,5 @@
+#' Reading in RBA Spreadsheets
+#'
 #' @name Bundle_RBA_Sheets
 #' @param DropboxDataFolder Address for folder containing RBA file locations with file paths saved as the object 'file_path' (and other meta information) created by the Bundle_RBA_Sheets function
 #' @param ListName Names for the output list
@@ -41,6 +43,8 @@ Bundle_RBA_Sheets <- function(DropboxDataFolder = NULL,
 
 }
 
+#' Processing RBA Spreadsheets into Usable Lists
+#'
 #' @name process_RBA_sheets
 #' @param input_ls List of RBA file locations with file paths saved as the object 'file_path' (and other meta information) created by the Bundle_RBA_Sheets function
 #' @param InclVarMeta Logical: include the variable information as columns in working_tbl.

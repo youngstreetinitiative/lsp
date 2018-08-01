@@ -82,6 +82,7 @@ GplotFormTS <- function(YBreaks = NA,
 #'
 #' @name FormArrange
 #' @param GGOutput ggplot object
+#' @param Plotly Logical. If true FormArrange sxports the plot as an interactive plot using the ploty function ggplotly rather than a grob object.
 #' @param InclColGuide Logical. Include the colour guide for line and point plots
 #' @param InclFillGuide Logical. Include the colour guide for bar and histogram plots
 #' @param title Plot title sitting top and centre of glob output
@@ -90,14 +91,16 @@ GplotFormTS <- function(YBreaks = NA,
 #' @param Ytitle2 Second Y-axis title for the right side, if it is different from the left side
 #' @param caption Text for the plot caption placed below the GGOutput plot
 #' @param InclLogo Logical. Include the YSI logo in the top right corner of the output
-#' @param TitleSize Font size of title text
-#' @param TextSize Font size of y axis titles, subtitle and caption
+#' @param TitleSize Font size of title text. Default 15.
+#' @param TextSize Font size of y axis titles and subtitle. Default 12.
+#' @param CaptionSize Font size of caption. Default 8.
 #' @return Image output of arranged components of a graph
 #' @export
 #'
 
 
 FormArrange <- function(GGOutput = NULL,
+                        Plotly = F,
                         InclColGuide = FALSE,
                         InclFillGuide = FALSE,
                         title = NULL,
@@ -119,6 +122,8 @@ FormArrange <- function(GGOutput = NULL,
     GGOutput <- GGOutput +
       guides(fill = "none")
   }
+
+  if(Plotly == F){
 
   # if(InclLogo == FALSE){
     FormArrange <- grid.arrange(
@@ -184,6 +189,16 @@ FormArrange <- function(GGOutput = NULL,
   #   ncol = 1,
   #   heights = c(0.08, 0.02, 0.02, 0.8, 0.03, 0.05))
   # }
+
+  } else {
+    GGOutput <- GGOutput +
+      labs(title = title,
+           subtitle = subtitle,
+           y = Ytitle,
+           caption = caption)
+
+    FormArrange <- ggplotly(GGOutput)
+  }
 
   return(invisible(FormArrange))
 
