@@ -9,33 +9,27 @@ output:
     toc_float: true
     number_sections: true
     self_contained: yes
-    css: C:/Users/User/Documents/lsp/Report Template/YSIcss.css
+    css: css\YSIcss.css
     highlight: pygments
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = F, message=F, warning=F)
 # Load the lsp package with useful packages and necessary YSI built functions
 library(lsp)
-# Load the Dropbox directory from which to draw and save objects
-paths::DropboxDirFN("/Dropbox (YSI)/YSI Team Folder/Content/Economy")
 ```
-<img src="C:/Users/User/Documents/lsp/Report Template/YSI.png" style="position:absolute;top:0px;right:0px;" />
+<div style="position: fixed; top: 0; right: 0;">
+  ![](imgs\YSI.png)
+</div>
 
-
-```{r echo = FALSE, error = F, message = F, warning = F}
-Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force")
-LabourForceList <- master_list
-rm(master_list)
+```{r}
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force",
+              ListName = "LabourForceList")
 ```
 
-
-```{r echo = FALSE, error = F, message = F, warning = F, fig.width = 7, fig.height = 5}
-
-```
 
 # Data References
-```{r results = "asis", echo = FALSE}
+```{r results = "asis"}
 # Prints out the table of sources used to make graphs
 kable(select(GraphSources, ReferencePrintOut) %>% distinct,
       col.names = "Data Sources",
