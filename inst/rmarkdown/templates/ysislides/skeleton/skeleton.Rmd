@@ -1,0 +1,45 @@
+---
+title: "HTML Slideshow Markdown Template"
+author: ""
+date: "`r Sys.Date()`"
+output: 
+  slidy_presentation:
+    css: YSIcss.css
+    highlight: pygments
+    self_contained: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message=F, warning=F)
+# Load the lsp package with useful packages and necessary YSI built functions
+library(lsp)
+```
+
+
+<!-- guide to using Slidy presentations http://rmarkdown.rstudio.com/slidy_presentation_format.html -->
+
+```{r}
+Bundle_Sheets(DropboxDataFolder = "Dropbox (YSI)/YSI Team Folder/Content/ABS Datasets/6202.0 Labour Force",
+              ListName = "LabourForceList")
+```
+
+# Slide 1
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+```{r}
+
+```
+
+# Slide 2
+<img src="YSI.png" style="position:absolute;top:0px;right:0px;" />
+```{r}
+
+```
+
+
+# Data References
+```{r results="asis"}
+# Prints out the table of sources used to make graphs
+kable(select(GraphSources, ReferencePrintOut) %>% distinct,
+      col.names = "Data Sources",
+      format = "markdown")
+```
