@@ -35,6 +35,10 @@ proj_primer <- function(Directory = UserDir) {
   projpath_imgs <- paste(project_path, "imgs", sep = "/")
   dir.create(projpath_imgs)
 
+  #Create the subdirectory for the figures folder
+  projpath_figures <- paste(project_path, "figures", sep = "/")
+  dir.create(projpath_figures)
+
   #Copy the YSI.png file from the lsp project to the imgs directory
   file.copy(from = paste(lsp_files, "YSI.png", sep = "/"), to = projpath_imgs, overwrite = FALSE)
 
