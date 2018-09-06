@@ -111,7 +111,8 @@ FormArrange <- function(GGOutput = NULL,
                         InclLogo = FALSE,
                         TitleSize = 15,
                         TextSize = 12,
-                        CaptionSize = 8){
+                        CaptionSize = 8,
+                        Save = FALSE){
 
   ## Removing guides when not specified to include
   if(InclColGuide == FALSE){
@@ -198,6 +199,22 @@ FormArrange <- function(GGOutput = NULL,
            caption = caption)
 
     FormArrange <- ggplotly(GGOutput)
+  }
+
+  if(Save == TRUE){
+
+    if(!exists("FigNum")){
+      FigNum <<- 1
+    }else{
+      FigNum <<- FigNum + 1
+    }
+
+    if(exists("Chapter")){
+      ggsave(paste0("figures/fig", Chapter, "_", FigNum, ".jpeg"), FormArrange)
+    }else{
+      message("Missing chapter number")
+    }
+
   }
 
   return(invisible(FormArrange))
