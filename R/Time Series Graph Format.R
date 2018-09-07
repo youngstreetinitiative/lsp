@@ -203,7 +203,7 @@ FormArrange <- function(GGOutput = NULL,
   }
 
   if(exists("Saveallfigures")){
-    if(SaveGraphs == TRUE){
+    if(Saveallfigures == TRUE){
 
       if(!exists("FigNum")){
         FigNum <<- 1
