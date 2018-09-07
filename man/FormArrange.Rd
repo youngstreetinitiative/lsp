@@ -7,7 +7,7 @@
 FormArrange(GGOutput = NULL, Plotly = F, InclColGuide = FALSE,
   InclFillGuide = FALSE, title = NULL, subtitle = NULL, Ytitle = NULL,
   Ytitle2 = "", caption = NULL, InclLogo = FALSE, TitleSize = 15,
-  TextSize = 12, CaptionSize = 8, Save = FALSE)
+  TextSize = 12, CaptionSize = 8, SaveName = NULL)
 }
 \arguments{
 \item{GGOutput}{ggplot object}
@@ -35,6 +35,8 @@ FormArrange(GGOutput = NULL, Plotly = F, InclColGuide = FALSE,
 \item{TextSize}{Font size of y axis titles and subtitle. Default 12.}
 
 \item{CaptionSize}{Font size of caption. Default 8.}
+
+\item{SaveName}{Name of file to save to the 'figures' folder. Will only save if there is a string input.}
 }
 \value{
 Image output of arranged components of a graph
