@@ -94,6 +94,7 @@ GplotFormTS <- function(YBreaks = NA,
 #' @param TitleSize Font size of title text. Default 15.
 #' @param TextSize Font size of y axis titles and subtitle. Default 12.
 #' @param CaptionSize Font size of caption. Default 8.
+#' @param SaveName Name of file to save to the 'figures' folder. Will only save if there is a string input.
 #' @return Image output of arranged components of a graph
 #' @export
 #'
@@ -112,7 +113,7 @@ FormArrange <- function(GGOutput = NULL,
                         TitleSize = 15,
                         TextSize = 12,
                         CaptionSize = 8,
-                        Save = FALSE){
+                        SaveName = NULL){
 
   ## Removing guides when not specified to include
   if(InclColGuide == FALSE){
@@ -201,21 +202,27 @@ FormArrange <- function(GGOutput = NULL,
     FormArrange <- ggplotly(GGOutput)
   }
 
-  if(Save == TRUE){
+  if(exists("Saveallfigures")){
+    if(SaveGraphs == TRUE){
 
-    if(!exists("FigNum")){
-      FigNum <<- 1
-    }else{
-      FigNum <<- FigNum + 1
+      if(!exists("FigNum")){
+        FigNum <<- 1
+      }else{
+        FigNum <<- FigNum + 1
+      }
+
+      if(exists("Chapter")){
+        ggsave(paste0("figures/fig", Chapter, "_", FigNum, ".jpeg"), FormArrange)
+      }else{
+        message("Missing chapter number")
+      }
     }
-
-    if(exists("Chapter")){
-      ggsave(paste0("figures/fig", Chapter, "_", FigNum, ".jpeg"), FormArrange)
-    }else{
-      message("Missing chapter number")
-    }
-
   }
+
+    if(exists("SaveName")){
+      ggsave(paste0("figures/", SaveName, ".jpeg"), FormArrange)
+    }
+
 
   return(invisible(FormArrange))
 
