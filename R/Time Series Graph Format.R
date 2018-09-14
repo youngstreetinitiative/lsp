@@ -113,7 +113,7 @@ FormArrange <- function(GGOutput = NULL,
                         TitleSize = 15,
                         TextSize = 12,
                         CaptionSize = 8,
-                        SaveName = NULL){
+                        SaveName = NA){
 
   ## Removing guides when not specified to include
   if(InclColGuide == FALSE){
@@ -219,7 +219,7 @@ FormArrange <- function(GGOutput = NULL,
     }
   }
 
-    if(exists("SaveName")){
+    if(!is.na(SaveName)){
       ggsave(paste0("figures/", SaveName, ".jpeg"), FormArrange)
     }
 

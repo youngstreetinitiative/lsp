@@ -7,7 +7,7 @@
 FormArrange(GGOutput = NULL, Plotly = F, InclColGuide = FALSE,
   InclFillGuide = FALSE, title = NULL, subtitle = NULL, Ytitle = NULL,
   Ytitle2 = "", caption = NULL, InclLogo = FALSE, TitleSize = 15,
-  TextSize = 12, CaptionSize = 8, SaveName = NULL)
+  TextSize = 12, CaptionSize = 8, SaveName = NA)
 }
 \arguments{
 \item{GGOutput}{ggplot object}
