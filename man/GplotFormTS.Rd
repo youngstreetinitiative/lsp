@@ -4,8 +4,9 @@
 \alias{GplotFormTS}
 \title{Graph Format template 2}
 \usage{
-GplotFormTS(YBreaks = NA, XyrBreaks = NA, Facet = FALSE, Index = FALSE,
-  yintercept0 = FALSE, ExpandToMargins = FALSE, TextSize = 16)
+GplotFormTS(YBreaks = NA, XyrBreaks = NA, Facet = FALSE,
+  Index = FALSE, yintercept0 = FALSE, ExpandToMargins = FALSE,
+  TextSize = 16)
 }
 \arguments{
 \item{YBreaks}{Number of Y-axis breaks (as a guide for pretty_breaks)}
