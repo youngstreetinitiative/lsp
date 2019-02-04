@@ -68,10 +68,12 @@ GplotFormTS <- function(YBreaks = NA,
     if(ExpandToMargins){
       GFormTS <- GFormTS +
         scale_y_continuous(breaks = pretty_breaks(YBreaks),
+                           label = comma,
                            expand = c(0, 0))
     }else{
       GFormTS <- GFormTS +
-        scale_y_continuous(breaks = pretty_breaks(YBreaks))
+        scale_y_continuous(label = comma,
+                           breaks = pretty_breaks(YBreaks))
     }
 
   return(GFormTS)

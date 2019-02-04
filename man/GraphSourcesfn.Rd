@@ -4,9 +4,9 @@
 \alias{GraphSourcesfn}
 \title{Return a table with references for data on each table}
 \usage{
-GraphSourcesfn(TableName = NULL, Data_List = master_list, SubTable = NA,
-  Year = NA, Table_No = NA, MasterList = TRUE, Source = NULL,
-  Catalogue = NA, LongTableName = NA)
+GraphSourcesfn(TableName = NULL, Data_List = master_list,
+  SubTable = NA, Year = NA, Table_No = NA, MasterList = TRUE,
+  Source = NULL, Catalogue = NA, LongTableName = NA)
 }
 \arguments{
 \item{TableName}{Working data.frame name for data}
