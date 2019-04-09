@@ -98,11 +98,11 @@ process_sheets <- function(input_ls, InclVarMeta = FALSE, LookForIndustry = FALS
     }
 
     working_tbl[1, 1] <- "VarNames"
-    working_tbl$X__1 <- clean_names_full(working_tbl$X__1)
+    working_tbl$...1 <- clean_names_full(working_tbl$...1)
     working_tbl[1, ] <- clean_names_full(working_tbl[1, ])
 
     meta_lower_bound <- which(str_detect(working_tbl %>% pull(1), "Series.ID"))
-    meta_names <- working_tbl$X__1[1:meta_lower_bound]
+    meta_names <- working_tbl$...1[1:meta_lower_bound]
 
     working_tbl <- t(working_tbl) %>%
       as.tibble(row.names = NA)
@@ -377,8 +377,10 @@ meta_clean <- function(meta_data = NULL, table_type = NULL){
   if (table_type == "Multi_Table") {
 
     # Save the table names and numbers from the Contents sheet along with a cleaned version of the names
-    meta_data <- meta_data %>% select(-`Australian Bureau of Statistics`) %>%
-      filter(!is.na(X__1), !is.na(X__2)) %>%
+    meta_data <<- meta_data
+    meta_data <- meta_data %>%
+      select(-`Australian Bureau of Statistics`) %>%
+      filter(!is.na(...2), !is.na(...3)) %>%
       `colnames<-`(c("Table", "Content")) %>%
       mutate(Table.Name = clean_names_full(Content))
 
@@ -387,8 +389,9 @@ meta_clean <- function(meta_data = NULL, table_type = NULL){
 
     # Save the vaiable information from the Index sheet
     # transform the Date variables to be readable
-    meta_data <- meta_data %>% select(-`Time Series Workbook`, -X__2) %>%
-      filter(!is.na(X__1)) %>%
+    meta_data <- meta_data %>%
+      select(-c(`Time Series Workbook`, ...3)) %>%
+      filter(!is.na(...1)) %>%
       head(max(lengths(.)) - 1) %>%
       tail(max(lengths(.)) - 1) %>%
       `colnames<-`(.[1,]) %>%
